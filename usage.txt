@@ -1,0 +1,33 @@
+iHere’s a breakdown of how to play the Blackjack game:
+
+Basic Setup
+1. Blackjack is played with one deck of standard playing cards (one deck has a total of 52 cards).
+2. The game has only one player. The dealer is the computer.
+3. Number cards (2-10) are worth their face value. Jacks, Queens, and Kings are worth 10 points each, and Aces can be worth either 1 or 11 points.
+4. The player is dealt two cards, and the dealer is dealt two cards (one face up and one face down).
+
+Basic Rules
+Player Options:
+1. Hit: Ask for another card to try to get closer to 21. The player can keep hitting until they choose to stand or go over 21.
+2. Stand: The player can Keep their current hand and end their turn.
+3. Split: If the player has two cards of the same value, they can split them into two separate hands. They can then place a separate bet on each hand.
+
+Dealer's Turn:
+1. The dealer reveals their face-down card and must hit until their hand reaches at least 17.
+2. If the dealer's hand exceeds 21, they bust, and the player wins.
+
+Winning
+1. If the player does not exceed 21 after having their fifth card in hand, they automatically win. This way of winning is called a Charlie.
+2. If the player’s hand is closer to 21 than the dealer’s at any point of the game, the player wins and earns a 1:1 payout. For example, if the player bets $1k, after winning the player earns $2k.
+3. If the player gets exactly 21 with your first two cards (a 10-value card + an Ace), this is called “blackjack,” and the player earns 3:2. For example, if the player bets $1k, the player earns $3k.
+4. If the player’s hand value exceeds 21, the player "busts" and loses the round automatically.
+5. If the player and the dealer have the same hand value, it’s a push, and the player gets their bet back.
+
+Strategy Tips
+1. The player should avoid hitting if their hand is 17 or higher, as there’s a high chance of busting.
+2. The player should always double down on 11, as the player gets in a strong position to hit a high total.
+3. The player should consider splitting pairs of Aces and 8s, but avoid splitting 10s or 5s.
+
+
+
+
