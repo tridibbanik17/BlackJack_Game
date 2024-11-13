@@ -1,4 +1,4 @@
-iHere’s a breakdown of how to play the Blackjack game:
+Here’s a breakdown of how to play the Blackjack game:
 
 Basic Setup
 1. Blackjack is played with one deck of standard playing cards (one deck has a total of 52 cards).
