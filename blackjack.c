@@ -3,20 +3,24 @@
 #include <time.h>
 #include "blackjack.h"
 
+/*  Main logic for Blackjack utility, including 
+    call from command line and game loop and
+    initialization.
+*/
+
+// main game logic
 void play_blackjack() {
+    // initialization
     Card deck[NUM_CARDS];
     Hand playerHand;
-
     srand((unsigned int)time(NULL)); // Setup random seed
-
     char continuePlaying;
-
-    printf("Welcome to Blackjack!\n");
-
     initialize_deck(deck);
     initialize_hand(&playerHand);
 
-    // Initial two cards
+    printf("Welcome to Blackjack!\n");
+
+    // draw initial two cards
     for (int i = 0; i < 2; i++) {
         draw_card(deck, &playerHand);
         printf("You drew: %s\n", playerHand.cards[i].name);
@@ -44,6 +48,7 @@ void play_blackjack() {
     }
 }
 
+// command line call
 int main(int argc, char* argv[]) {
     play_blackjack();
     return 0;

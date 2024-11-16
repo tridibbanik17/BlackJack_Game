@@ -1,6 +1,10 @@
 #ifndef BLACKJACK_H
 #define BLACKJACK_H
 
+/*  Define constraints, structs, and
+    functions for the blackjack utility
+*/
+
 #define NUM_CARDS 52
 #define NUM_SUITS 4
 #define NUM_RANKS 13
