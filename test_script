@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# Set the executable name
+EXEC="blackjack_game"
+
+# Compile the C program
+echo "Compiling the Blackjack program..."
+gcc -o $EXEC blackjack.c -lm
+
+# Check if compilation is successful
+if [ $? -ne 0 ]; then
+    echo "Compilation failed. Exiting test script."
+    exit 1
+fi
+
+# Test 1 - Simulate a game with valid input (Player chooses 'Hit' then 'Stand')
+echo "Test 1: Simulate game with valid input (Player hits and then stands)..."
+
+# Create a file to simulate input
+INPUT_FILE="input_test_1.txt"
+echo -e "1000\nH\nS\n" > $INPUT_FILE
+
+# Run the program and redirect the output to a file
+./$EXEC < $INPUT_FILE > output_test_1.txt
+
+# Check if output contains 'Welcome to Blackjack' to verify the program ran
+if grep -q "Welcome to Blackjack" output_test_1.txt; then
+    echo "Test 1 Passed: The game started correctly."
+else
+    echo "Test 1 Failed: The game did not start correctly."
+fi
+
+# Check if the output contains 'Player's hand' and 'Dealer's hand' (checking the basic game flow)
+if grep -q "Player's hand" output_test_1.txt && grep -q "Dealer's hand" output_test_1.txt; then
+    echo "Test 1 Passed: Correct hands were displayed."
+else
+    echo "Test 1 Failed: Hands were not displayed correctly."
+fi
