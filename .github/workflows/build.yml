@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-name: build script for hello.c		
-=======
 name: build script for blackjack.c		
->>>>>>> 753504d9b3662a1421dd5ab366d7068cb7cf6c94
 
 on:							
   push:
@@ -14,25 +10,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4		
 
-<<<<<<< HEAD
-      - name: build hello			
-        run: gcc -o hello hello.c		
-=======
       - name: build blackjack			
-        run: make
-
-      - name: build test_script
-        run: ./test_script > test_results.txt
->>>>>>> 753504d9b3662a1421dd5ab366d7068cb7cf6c94
+        run: make	
+      
+      - name: test script
+        run: ./test_script > test_results.txt        
 
       - name: upload binary			
         uses: actions/upload-artifact@v4	
         with:
-<<<<<<< HEAD
-          name: Hello World			
-          path: ./hello				
-=======
-          name: Blackjack executable		
-          path: ./blackjack				
->>>>>>> 753504d9b3662a1421dd5ab366d7068cb7cf6c94
-
+          name: Blackjack			
+          path: ./blackjack	
