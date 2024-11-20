@@ -10,12 +10,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4		
 
-      - name: build hello			
-        run: gcc -o hello hello.c		
+      - name: build blackjack			
+        run: gcc -o blackjack blackjack.c		
 
       - name: upload binary			
         uses: actions/upload-artifact@v4	
         with:
           name: Hello World			
-          path: ./hello				
+          path: ./blackjack				
 
