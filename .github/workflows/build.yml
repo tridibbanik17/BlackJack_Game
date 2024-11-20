@@ -13,6 +13,9 @@ jobs:
       - name: build blackjack			
         run: make
 
+      - name: build test_script
+        run: ./test_script > test_results.txt
+
       - name: upload binary			
         uses: actions/upload-artifact@v4	
         with:
