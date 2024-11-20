@@ -2,11 +2,22 @@
 #include <stdlib.h>
 #include <time.h>
 #include "blackjack.h"
+#include <stdbool.h>
 
 /*  Main logic for Blackjack utility, including 
     call from command line and game loop and
     initialization.
 */
+
+// get_input returns whether user input is yes or not
+bool get_input(){
+	char input;
+	scanf("%c", &input);
+        if (input == 'y' || input == 'Y') {
+		return true;
+	}
+	return false;
+}
 
 // main game logic
 void play_blackjack() {

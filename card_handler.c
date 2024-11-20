@@ -17,11 +17,11 @@ void initialize_deck(Card* deck) {
             deck[idx].isDrawn = 0;
 
             // build card name
-            strcpy(deck[idx].name, ranks[rank]);
+            strcpy(deck[idx].name, ranks[rank]); 
             strcat(deck[idx].name, " of ");
             strcat(deck[idx].name, suits[suit]);
             
-            deck[idx].value = (rank >= 9) ? 10 : (rank + 2); // Face cards have a value of 10, others take their rank
+            deck[idx].value = (rank == 12) ? 11 : ((rank >= 9) ? 10 : (rank + 2)); // Face cards have a value of 10, others take their rank
             idx++;
         }
     }
@@ -32,17 +32,39 @@ void initialize_hand(Hand* hand) {
     hand->cardCount = 0;
 }
 
+//void initialize_hand(Player* player){
+//	player->hands = malloc(sizeof(Hand));
+//}
+
+// adjusting hand value based on special value aces
+void ace_adjuster(Hand* hand){
+        for(int i=0; i<hand->cardCount; i++){
+                if(hand->cards[i].value == 11){
+			if(hand->value > 21){
+				hand->value -= 10; // adjusting hand value
+                		hand->cards[i].value -= 10; // adjusting ace value from 11 to 1
+        		}		
+		}
+	}
+	
+}
+
+
 void draw_card(Card* deck, Hand* hand) {
     // Randomly select a card
     int cardIndex;
     do {
         cardIndex = rand() % NUM_CARDS;
     } while (deck[cardIndex].isDrawn);
-
+    
     deck[cardIndex].isDrawn = 1;
 
     // Add card to hand
     hand->cards[hand->cardCount] = deck[cardIndex];
     hand->cardCount++;
+
     hand->value += deck[cardIndex].value;
+
+    // accounting for possible aces
+    ace_adjuster(hand);
 }
