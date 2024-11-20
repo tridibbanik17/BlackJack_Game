@@ -32,21 +32,21 @@ void initialize_hand(Hand* hand) {
     hand->cardCount = 0;
 }
 
+//void initialize_hand(Player* player){
+//	player->hands = malloc(sizeof(Hand));
+//}
 
 // adjusting hand value based on special value aces
 void ace_adjuster(Hand* hand){
-        int aceCount = 0; // number of aces in hand
-
         for(int i=0; i<hand->cardCount; i++){
                 if(hand->cards[i].value == 11){
-                        aceCount ++;
-                }
-        }
-
-        if(hand->value > 21 && aceCount > 0){
-                hand->value -= 10;
-                aceCount --;
-        }
+			if(hand->value > 21){
+				hand->value -= 10; // adjusting hand value
+                		hand->cards[i].value -= 10; // adjusting ace value from 11 to 1
+        		}		
+		}
+	}
+	
 }
 
 
@@ -62,6 +62,7 @@ void draw_card(Card* deck, Hand* hand) {
     // Add card to hand
     hand->cards[hand->cardCount] = deck[cardIndex];
     hand->cardCount++;
+
     hand->value += deck[cardIndex].value;
 
     // accounting for possible aces
