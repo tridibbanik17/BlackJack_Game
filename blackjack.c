@@ -20,7 +20,7 @@ bool get_input(){
 }
 
 // main game logic
-void play_blackjack() {
+void play_blackjack(int *balance) {
     // initialization
     Card deck[NUM_CARDS];
     Hand playerHand;
@@ -28,11 +28,11 @@ void play_blackjack() {
     char continuePlaying;
     initialize_deck(deck);
     initialize_hand(&playerHand);
-    int bet; 
+    int initialBet = 0;
 
-    printf("Welcome to Blackjack!\n");
+    // handle initial bet
     printf("Enter the bet amount: $");
-    scanf("%d", &bet);
+    scanf("%d", &initialBet);
 
     // draw initial two cards
     for (int i = 0; i < 2; i++) {
@@ -70,6 +70,17 @@ void play_blackjack() {
 
 // command line call
 int main(int argc, char* argv[]) {
-    play_blackjack();
+    int balance = 500;
+    printf("Welcome to Blackjack!\n");
+
+    while (balance > 0) {
+        play_blackjack(&balance);
+        printf("Continue? ");
+        if (!get_input()) {
+            break;
+        }
+    }
+    printf("bye");
+
     return 0;
 }

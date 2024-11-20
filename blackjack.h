@@ -21,6 +21,7 @@ typedef struct {
 typedef struct {
     int cardCount;
     int value;
+    int bet;
     Card cards[NUM_CHARLIE];
 } Hand;
 
