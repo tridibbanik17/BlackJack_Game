@@ -64,8 +64,9 @@ void play_blackjack() {
     /*
     // Get the game result
     game_result(&playerHand, &dealerHand, bet);
-}
 */
+}
+
 
 // command line call
 int main(int argc, char* argv[]) {
