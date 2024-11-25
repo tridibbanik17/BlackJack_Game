@@ -1,38 +1,83 @@
 #!/bin/bash
+#
+# A simple framework for regression testing blackjack  (blackjack_test) script
+#
+# Returns the number of failed test cases.
+#
+# Format of a test:
+#     test 'command' 'input file name' 'expected output file name' 'expected std error file name'
+#
+# Some example test cases are given. You should add more test cases.
+#
+# CAUTION: Uses temporary files named test_err.txt and test_out.txt
+#
+#
+declare -i tc=0
+declare -i fails=0
 
-# Set the executable name
-EXEC="blackjack_game"
+############################################
+# Run a single test. Runs a given command 
+# to check the return value, stdout, and stderr
+#
+# GLOBALS: tc, fails
+# PARAMS: $1 = command
+#         $2 = input file name
+#         $3 = expected std output file name
+#         $4 = expected std error file name
+#
+# Assumes return value should be 0 if the
+# std error file is empty. Otherwise it 
+# should be 1.
+#
+# OUTPUTS: An pass/fail report showing the
+# difference between expected and actual
+# output on a failure (diff command)
+############################################
+test() {
+    tc=tc+1
 
-# Compile the C program
-echo "Compiling the Blackjack program..."
-gcc -o $EXEC blackjack.c -lm
+    local COMMAND=$1
+    local INP=$2
+    #local EX_OUT=$3
+    #local EX_ERR=$4 
+    local EX_ERR=$3
 
-# Check if compilation is successful
-if [ $? -ne 0 ]; then
-    echo "Compilation failed. Exiting test script."
-    exit 1
-fi
+    EX_RET=1
+    if [[ $(cat $EX_ERR) = "" ]]; then
+        EX_RET=0
+    fi
+    $COMMAND < $INP > test_out.txt 2> test_err.txt
+    RET=$?
+    if [[ $RET != $EX_RET ]]; then
+        echo "TC $tc Failed"
+        echo "Returned $RET"
+        echo "-----------"
+        fails=$fails+1
+        return
+    fi
+    # DIFF=$(diff test_out.txt $EX_OUT)
+    #if [[ $DIFF != '' ]]; then
+    #    echo "TC $tc Failed Standard Output"
+    #    echo "$DIFF"
+    #    echo "-----------"
+    #    fails=$fails+1
+    #    return
+    #fi
+    DIFF=$(diff test_err.txt $EX_ERR)
+    if [[ $DIFF != '' ]]; then
+        echo "TC $tc Failed Standard Error"
+        echo "$DIFF"
+        echo "-----------"
+        fails=$fails+1
+        return
+    fi
 
-# Test 1 - Simulate a game with valid input (Player chooses 'Hit' then 'Stand')
-echo "Test 1: Simulate game with valid input (Player hits and then stands)..."
+    echo "TC $tc Passed"
+}
 
-# Create a file to simulate input
-INPUT_FILE="input_test_1.txt"
-echo -e "1000\nH\nS\n" > $INPUT_FILE
+test './blackjack' 'inp1.txt' 'empty.txt'
+# clean up
+rm test_err.txt test_out.txt
 
-# Run the program and redirect the output to a file
-./$EXEC < $INPUT_FILE > output_test_1.txt
-
-# Check if output contains 'Welcome to Blackjack' to verify the program ran
-if grep -q "Welcome to Blackjack" output_test_1.txt; then
-    echo "Test 1 Passed: The game started correctly."
-else
-    echo "Test 1 Failed: The game did not start correctly."
-fi
-
-# Check if the output contains 'Player's hand' and 'Dealer's hand' (checking the basic game flow)
-if grep -q "Player's hand" output_test_1.txt && grep -q "Dealer's hand" output_test_1.txt; then
-    echo "Test 1 Passed: Correct hands were displayed."
-else
-    echo "Test 1 Failed: Hands were not displayed correctly."
-fi
+# return code
+exit $fails

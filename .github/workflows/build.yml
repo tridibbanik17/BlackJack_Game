@@ -11,11 +11,13 @@ jobs:
       - uses: actions/checkout@v4		
 
       - name: build blackjack			
-        run: make
+        run: make	
+      
+      - name: test script
+        run: ./test_script > test_results.txt        
 
       - name: upload binary			
         uses: actions/upload-artifact@v4	
         with:
-          name: Blackjack executable		
-          path: ./blackjack				
-
+          name: Blackjack			
+          path: ./blackjack	

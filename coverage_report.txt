@@ -1,0 +1,5 @@
+File 'blackjack.c'
+Lines executed:92.31% of 39
+Creating 'blackjack.c.gcov'
+
+Lines executed:92.31% of 39
