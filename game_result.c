@@ -8,7 +8,7 @@ void reveal_hand(Hand *hand, const char *card_holder) {
     for (int i = 0; i < hand->cardCount; i++) {
         printf("%s, ", hand->cards[i].name); // Print each card in the hand
     }
-    printf("Total value: %d\n", hand->value); // Print the total value of the hand
+    printf("\nValue: %d\n", hand->value); // Print the total value of the hand
 }
 
 // Function for the dealer to play its turn
@@ -16,8 +16,8 @@ void play_dealer(Card *deck, Hand *dealerHand) {
     // Dealer must draw cards until their hand value is at least 17
     while (dealerHand->value < 17) {
         draw_card(deck, dealerHand);
-        reveal_hand(dealerHand, "Dealer"); // Print dealer's hand after each card draw
     }
+    reveal_hand(dealerHand, "Dealer");
 }
 
 // Function to get the game result

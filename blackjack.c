@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <time.h>
 #include "blackjack.h"
 #include <stdbool.h>
@@ -12,7 +13,7 @@
 // get_input returns whether user input is yes or not
 bool get_input(){
 	char input;
-	scanf("%c", &input);
+	scanf(" %c", &input);
     if (input == 'y' || input == 'Y') {
         return true;
     }
@@ -24,7 +25,7 @@ int get_initial_bet() {
     int initialBet = 0;
     printf("Enter the bet amount: $");
     scanf("%d", &initialBet);
-    return initialBet || 100;
+    return initialBet != 0 ? initialBet : 100;
 }
 
 void deal_player_hand(Card *deck, Hand *playerHand) {
@@ -33,7 +34,7 @@ void deal_player_hand(Card *deck, Hand *playerHand) {
         draw_card(deck, playerHand);
         printf("You drew: %s\n", playerHand->cards[i].name);
     }
-    printf("Your hand value is: %d\n", playerHand->value);
+    printf("The value of your hand is: %d\n", playerHand->value);
 }
 
 void player_hit_loop(Card *deck, Hand *playerHand) {
@@ -75,27 +76,38 @@ void play_blackjack(int *balance) {
     player_hit_loop(deck, &playerHand);
 
     // dealer's turn
+    printf("\nDealer's Turn:\n");
     play_dealer(deck, &dealerHand);
 
     // handle the game result
     int payout = playerHand.bet;
     char *result_msg = game_result(&playerHand, &dealerHand, &payout);
-    printf("%s\n", result_msg);
-    balance += (payout - playerHand.bet);
+    printf("\n%s\n", result_msg);
+    int balanceDiff =  (payout - playerHand.bet);
+    *balance += balanceDiff;
+    printf("You bet $%d and earned: $%d\n", playerHand.bet, balanceDiff);
+    printf("Current balance: $%d\n\n", *balance);
 }
 
 void blackjack_manager() {
     int balance = 500;
     printf("Welcome to Blackjack!\n");
+    printf("\nBalance: $%d\n", balance);
+    
+    play_blackjack(&balance);
 
     while (balance > 0) {
-        play_blackjack(&balance);
         printf("Continue? (y/n)\n");
-        if (!get_input()) {
+        if (get_input() == false) {
             break;
         }
+        play_blackjack(&balance);
     }
-    printf("\nYou're broke. Bye\n");
+    if (balance <= 0) {
+        printf("\nYou're broke. Bye\n");
+    } else {
+        printf("You started with $500 and left with $%d\n", balance);
+    }
 }
 
 
