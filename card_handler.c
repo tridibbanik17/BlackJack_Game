@@ -30,6 +30,7 @@ void initialize_deck(Card* deck) {
 void initialize_hand(Hand* hand) {
     hand->value = 0;
     hand->cardCount = 0;
+    hand->bet = 0;
 }
 
 //void initialize_hand(Player* player){
