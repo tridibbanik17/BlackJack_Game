@@ -77,12 +77,11 @@ void render_game(SDL_Renderer *renderer, TTF_Font *font, GameState state, char* 
         render_text(renderer, font, bet_input, 100, 550);
         //render_text(renderer, font, strBalance, 100, 450);
     } else if (state == PLAYER_TURN) {
-        render_text(renderer, font, "Player turn (h to hit, s to stand", 100, 50);
+        render_text(renderer, font, "Player turn (h to hit, s to stand)", 100, 50);
         render_hand(renderer, font, playerHand, 100, 225);
         render_hand(renderer, font, dealerHand, 100, 450);
     } else if (state == WIN) {
         render_text(renderer, font, "You win!! (enter to continue)", 100, 50);
-        //add line for bet multiplier
     } else if (state == LOSE_BUST) {
         render_text(renderer, font, "BUST! You've lost! (enter to continue)", 100, 50);
     } else if (state == LOSE_DEALWIN) {

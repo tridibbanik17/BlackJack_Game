@@ -73,25 +73,6 @@ void deal_player_hand(Card *deck, Hand *playerHand) {
     }
 }
 
-/*void player_hit_loop(Card *deck, Hand *playerHand) {
-    char continuePlaying;
-
-    do {
-        printf("Would you like to draw another card? (y/n): ");
-        scanf(" %c", &continuePlaying);
-        if (continuePlaying == 'y' || continuePlaying == 'Y') {
-            draw_card(deck, playerHand);
-            printf("You drew: %s\n", playerHand->cards[playerHand->cardCount - 1].name);
-            printf("Your hand value is: %d\n", playerHand->value);
-
-            if (playerHand->value > 21 || playerHand->cardCount >= NUM_CHARLIE) {
-                //printf("Bust! Your hand value exceeded 21. Game over.\n");
-                break;
-            }
-        }
-    } while (continuePlaying == 'y' || continuePlaying == 'Y');
-}*/
-
 void initialize_cards(Card *deck, Hand *playerHand, Hand*dealerHand){
     initialize_deck(deck);
     initialize_hand(playerHand);
@@ -112,51 +93,3 @@ void play_dealer(Card *deck, Hand *dealerHand) {
         draw_card(deck, dealerHand);
     }
 }
-// main game logic
-/*void play_blackjack(int *balance, Card deck[NUM_CARDS], Hand *playerHand, Hand *dealerHand) {
-
-    initialize_deck(deck);
-    initialize_hand(&playerHand);
-    initialize_hand(&dealerHand);
-    int initialBet = get_initial_bet();
-    playerHand.bet = initialBet;
-
-    deal_player_hand(deck, &playerHand);
-
-    // player hit/stand loop
-    player_hit_loop(deck, &playerHand);
-
-    // dealer's turn
-    printf("\nDealer's Turn:\n");
-    play_dealer(deck, &dealerHand);
-
-    // handle the game result
-    int payout = playerHand.bet;
-    char *result_msg = game_result(&playerHand, &dealerHand, &payout);
-    printf("\n%s\n", result_msg);
-    int balanceDiff =  (payout - playerHand.bet);
-    *balance += balanceDiff;
-    printf("You bet $%d and earned: $%d\n", playerHand.bet, balanceDiff);
-    printf("Current balance: $%d\n\n", *balance);
-}*/
-
-/*void blackjack_manager() {
-    int balance = 500;
-    printf("Welcome to Blackjack!\n");
-    printf("\nBalance: $%d\n", balance);
-    
-    play_blackjack(&balance);
-
-    while (balance > 0) {
-        printf("Continue? (y/n)\n");
-        if (get_input() == false) {
-            break;
-        }
-        play_blackjack(&balance);
-    }
-    if (balance <= 0) {
-        printf("\nYou're broke. Bye\n");
-    } else {
-        printf("You started with $500 and left with $%d\n", balance);
-    }
-}*/
