@@ -170,7 +170,11 @@ int main(int argc, char *argv[]) {
                         case SDLK_RETURN:
                             balance -= bet;
                             printf("enter key pressed!");
-                            state = CONTINUE;
+                            if (balance > 0){
+                                state = CONTINUE;
+                            } else {
+                                state = GAME_OVER;
+                            }
                             break;
                         default:
                             printf("The %d key was pressed", event.key.keysym.sym);
@@ -187,7 +191,12 @@ int main(int argc, char *argv[]) {
                         case SDLK_RETURN:
                             balance -= bet;
                             printf("enter key pressed!");
-                            state = CONTINUE;
+                            //should also be a function below
+                            if (balance > 0){
+                                state = CONTINUE;
+                            } else {
+                                state = GAME_OVER;
+                            }
                             break;
                         default:
                             printf("The %d key was pressed", event.key.keysym.sym);

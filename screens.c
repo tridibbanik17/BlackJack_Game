@@ -28,7 +28,7 @@ void render_text(SDL_Renderer *renderer, TTF_Font *font, const char *text, int x
     SDL_DestroyTexture(texture);
 }
 
-void render_game(SDL_Renderer *renderer, TTF_Font *font, GameState state, char* bet_input){
+void render_game(SDL_Renderer *renderer, TTF_Font *font, GameState state, char* bet_input, int balance){
     SDL_SetRenderDrawColor(renderer, 0, 128, 0, 255); // Green background
     SDL_RenderClear(renderer);
     if (state == MENU){
@@ -37,18 +37,19 @@ void render_game(SDL_Renderer *renderer, TTF_Font *font, GameState state, char* 
         render_text(renderer, font, "How much would you like to bet? (enter to continue)", 100, 50);
         render_text(renderer, font, bet_input, 100, 550);
     } else if (state == PLAYER_TURN) {
-        render_text(renderer, font, "Player turn (w to win, b to bust, d to dealer win)", 100, 50);
+        render_text(renderer, font, "Player turn (h to hit, s to stand", 100, 50);
     } else if (state == WIN) {
         render_text(renderer, font, "You win!! (enter to continue)", 100, 50);
+        //add line for bet multiplier
     } else if (state == LOSE_BUST) {
-        render_text(renderer, font, "BUST! You've lost (c if money, g if no money)", 100, 50);
+        render_text(renderer, font, "BUST! You've lost! (enter to continue)", 100, 50);
     } else if (state == LOSE_DEALWIN) {
-        render_text(renderer, font, "Dealer wins! You've lost (c if money, g is no money)", 100, 50);
+        render_text(renderer, font, "Dealer wins! You've lost (enter to continue)", 100, 50);
     } else if (state == PUSH) {
         render_text(renderer, font, "Push! All bets returned (enter to continue)", 100, 50);
     } else if (state == CONTINUE) {
         render_text(renderer, font, "Keep playing ?? (y to keep playing, n to stop)", 100, 50);
     } else if (state == GAME_OVER) {
-        render_text(renderer, font, "Game over brokie (enter to go back to the lobby))", 100, 50);
+        render_text(renderer, font, "Game over! (enter to go back to the lobby))", 100, 50);
     }
 }
