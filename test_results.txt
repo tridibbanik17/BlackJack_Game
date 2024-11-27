@@ -1,7 +1,0 @@
-TC 1 Passed
-TC 2 Passed
-TC 3 Passed
-TC 4 Passed
-TC 5 Passed
-TC 6 Passed
-TC 7 Passed

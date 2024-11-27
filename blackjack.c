@@ -56,6 +56,24 @@ void player_hit_loop(Card *deck, Hand *playerHand) {
     } while (continuePlaying == 'y' || continuePlaying == 'Y');
 }
 
+// Function to print the cards in a hand and its total value
+void reveal_hand(Hand *hand, const char *card_holder) {
+    printf("%s's hand: ", card_holder); // Print whose hand is holding a particular set of cards (i.e., Player or Dealer)
+    for (int i = 0; i < hand->cardCount; i++) {
+        printf("%s, ", hand->cards[i].name); // Print each card in the hand
+    }
+    printf("\nValue: %d\n", hand->value); // Print the total value of the hand
+}
+
+// Function for the dealer to play its turn
+void play_dealer(Card *deck, Hand *dealerHand) {
+    // Dealer must draw cards until their hand value is at least 17
+    while (dealerHand->value < 17) {
+        draw_card(deck, dealerHand);
+    }
+    reveal_hand(dealerHand, "Dealer");
+}
+
 // main game logic
 void play_blackjack(int *balance) {
     // initialization
