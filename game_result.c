@@ -1,24 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include "blackjack.h"
-
-// Function to print the cards in a hand and its total value
-void reveal_hand(Hand *hand, const char *card_holder) {
-    printf("%s's hand: ", card_holder); // Print whose hand is holding a particular set of cards (i.e., Player or Dealer)
-    for (int i = 0; i < hand->cardCount; i++) {
-        printf("%s, ", hand->cards[i].name); // Print each card in the hand
-    }
-    printf("\nValue: %d\n", hand->value); // Print the total value of the hand
-}
-
-// Function for the dealer to play its turn
-void play_dealer(Card *deck, Hand *dealerHand) {
-    // Dealer must draw cards until their hand value is at least 17
-    while (dealerHand->value < 17) {
-        draw_card(deck, dealerHand);
-    }
-    reveal_hand(dealerHand, "Dealer");
-}
+#include<time.h>
 
 // Function to get the game result
 // Side-effect, updates payout
@@ -56,3 +39,5 @@ char *game_result(Hand *playerHand, Hand *dealerHand, int *payout) {
         return "Push! Player got their bet back.\n";
     }
 }
+
+

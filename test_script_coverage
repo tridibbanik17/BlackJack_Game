@@ -62,28 +62,28 @@ test() {
 ############################################
 
 # Test 1: Player wins with higher value
-test './testing_game_result' './build_testing/input/inp1.txt' './build_testing/output/out1.txt' './build_testing/error/empty.txt'
+test './game_result_coverage' './build_testing/input/inp1.txt' './build_testing/output/out1.txt' './build_testing/error/empty.txt'
 
 # Test 2: Dealer wins
-test './testing_game_result' './build_testing/input/inp2.txt' './build_testing/output/out2.txt' './build_testing/error/empty.txt'
+test './game_result_coverage' './build_testing/input/inp2.txt' './build_testing/output/out2.txt' './build_testing/error/empty.txt'
 
 # Test 3: Player busts
-test './testing_game_result' './build_testing/input/inp3.txt' './build_testing/output/out3.txt' './build_testing/error/empty.txt'
+test './game_result_coverage' './build_testing/input/inp3.txt' './build_testing/output/out3.txt' './build_testing/error/empty.txt'
 
 # Test 4: 5-Card Charlie
-test './testing_game_result' './build_testing/input/inp4.txt' './build_testing/output/out4.txt' './build_testing/error/empty.txt'
+test './game_result_coverage' './build_testing/input/inp4.txt' './build_testing/output/out4.txt' './build_testing/error/empty.txt'
 
 # Test 5: Blackjack win
-test './testing_game_result' './build_testing/input/inp5.txt' './build_testing/output/out5.txt' './build_testing/error/empty.txt'
+test './game_result_coverage' './build_testing/input/inp5.txt' './build_testing/output/out5.txt' './build_testing/error/empty.txt'
 
 # Test 6: Invalid bet amount
-test './testing_game_result' './build_testing/input/inp6.txt' './build_testing/output/out6.txt' './build_testing/error/err6.txt'
+test './game_result_coverage' './build_testing/input/inp6.txt' './build_testing/output/out6.txt' './build_testing/error/err6.txt'
 
 # Test 7: Invalid input
-test './testing_game_result' './build_testing/input/inp7.txt' './build_testing/output/out7.txt' './build_testing/error/err7.txt'
+test './game_result_coverage' './build_testing/input/inp7.txt' './build_testing/output/out7.txt' './build_testing/error/err7.txt'
 
 # Test 8: Push result
-test './testing_game_result' './build_testing/input/inp8.txt' './build_testing/output/out8.txt' './build_testing/error/empty.txt'
+test './game_result_coverage' './build_testing/input/inp8.txt' './build_testing/output/out8.txt' './build_testing/error/empty.txt'
 
 ############################################
 # Clean up

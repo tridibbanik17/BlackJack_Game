@@ -1,0 +1,1 @@
+Oops! Bet amount can never be zero or less.
