@@ -1,71 +1,53 @@
 #!/bin/bash
-#
-# A simple framework for regression testing blackjack  (blackjack_test) script
-#
-# Returns the number of failed test cases.
-#
-# Format of a test:
-#     test 'command' 'input file name' 'expected output file name' 'expected std error file name'
-#
-# Some example test cases are given. You should add more test cases.
-#
-# CAUTION: Uses temporary files named test_err.txt and test_out.txt
-#
-#
+
+# Declare test counters
 declare -i tc=0
 declare -i fails=0
 
 ############################################
-# Run a single test. Runs a given command 
-# to check the return value, stdout, and stderr
-#
-# GLOBALS: tc, fails
-# PARAMS: $1 = command
-#         $2 = input file name
-#         $3 = expected std output file name
-#         $4 = expected std error file name
-#
-# Assumes return value should be 0 if the
-# std error file is empty. Otherwise it 
-# should be 1.
-#
-# OUTPUTS: An pass/fail report showing the
-# difference between expected and actual
-# output on a failure (diff command)
+# Function to run a single test
 ############################################
 test() {
     tc=tc+1
 
     local COMMAND=$1
     local INP=$2
-    #local EX_OUT=$3
-    #local EX_ERR=$4 
-    local EX_ERR=$3
+    local EX_OUT=$3
+    local EX_ERR=$4
 
+    # Determine expected return code
     EX_RET=1
-    if [[ $(cat $EX_ERR) = "" ]]; then
+    if [[ ! -s $EX_ERR ]]; then
         EX_RET=0
     fi
+
+    # Run the command
     $COMMAND < $INP > test_out.txt 2> test_err.txt
     RET=$?
+
+    # Check return code
     if [[ $RET != $EX_RET ]]; then
-        echo "TC $tc Failed"
-        echo "Returned $RET"
+        echo "TC $tc Failed (Return Code)"
+        echo "Returned $RET, Expected $EX_RET"
         echo "-----------"
         fails=$fails+1
         return
     fi
-    # DIFF=$(diff test_out.txt $EX_OUT)
-    #if [[ $DIFF != '' ]]; then
-    #    echo "TC $tc Failed Standard Output"
-    #    echo "$DIFF"
-    #    echo "-----------"
-    #    fails=$fails+1
-    #    return
-    #fi
+
+    # Check standard output
+    DIFF=$(diff test_out.txt $EX_OUT)
+    if [[ $DIFF != '' ]]; then
+        echo "TC $tc Failed (Standard Output)"
+        echo "$DIFF"
+        echo "-----------"
+        fails=$fails+1
+        return
+    fi
+
+    # Check standard error
     DIFF=$(diff test_err.txt $EX_ERR)
     if [[ $DIFF != '' ]]; then
-        echo "TC $tc Failed Standard Error"
+        echo "TC $tc Failed (Standard Error)"
         echo "$DIFF"
         echo "-----------"
         fails=$fails+1
@@ -75,9 +57,36 @@ test() {
     echo "TC $tc Passed"
 }
 
-test './blackjack' 'inp1.txt' 'empty.txt'
-# clean up
-rm test_err.txt test_out.txt
+############################################
+# Test Cases
+############################################
 
-# return code
+# Test 1: Player wins with higher value
+test './testing_game_result' 'inp1.txt' 'out1.txt' 'empty.txt'
+
+# Test 2: Dealer wins
+test './testing_game_result' 'inp2.txt' 'out2.txt' 'empty.txt'
+
+# Test 3: Player busts
+test './testing_game_result' 'inp3.txt' 'out3.txt' 'empty.txt'
+
+# Test 4: 5-Card Charlie
+test './testing_game_result' 'inp4.txt' 'out4.txt' 'empty.txt'
+
+# Test 5: Blackjack win
+test './testing_game_result' 'inp5.txt' 'out5.txt' 'empty.txt'
+
+# Test 6: Invalid bet amount
+test './testing_game_result' 'inp6.txt' 'out6.txt' 'err6.txt'
+
+# Test 7: Invalid input
+test './testing_game_result' 'inp7.txt' 'out7.txt' 'err7.txt'
+
+############################################
+# Clean up
+############################################
+
+rm test_out.txt test_err.txt
+
+# Return code
 exit $fails

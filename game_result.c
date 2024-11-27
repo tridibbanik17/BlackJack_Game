@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include "blackjack.h"
+#include<time.h>
 
 // Function to print the cards in a hand and its total value
 void reveal_hand(Hand *hand, const char *card_holder) {
@@ -56,3 +57,5 @@ char *game_result(Hand *playerHand, Hand *dealerHand, int *payout) {
         return "Push! Player got their bet back.\n";
     }
 }
+
+

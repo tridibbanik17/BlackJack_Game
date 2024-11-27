@@ -1,0 +1,2 @@
+Yay! Player won.
+Payout: 200

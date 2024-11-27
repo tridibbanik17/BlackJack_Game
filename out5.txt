@@ -1,0 +1,2 @@
+Blackjack! Player wins.
+Payout: 250
