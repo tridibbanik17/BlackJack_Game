@@ -1,1 +1,4 @@
 blackjack
+*.gcda
+*.gcno
+*.gcov

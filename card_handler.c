@@ -33,9 +33,6 @@ void initialize_hand(Hand* hand) {
     hand->bet = 0;
 }
 
-//void initialize_hand(Player* player){
-//	player->hands = malloc(sizeof(Hand));
-//}
 
 // adjusting hand value based on special value aces
 void ace_adjuster(Hand* hand){
