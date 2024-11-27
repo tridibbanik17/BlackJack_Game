@@ -5,15 +5,20 @@
 #include <stdbool.h>
 #include <time.h>
 #include <string.h>
-#include "blackjack.h"
+#include <ctype.h>
 #include "screens.h"
+#include "gui_game_logic.h"
 
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 600
 
 int main(int argc, char *argv[]) {
 
-    GameState state = MENU;
+    if(argc > 1 && strcmp(argv[1], "--help") == 0){
+		display_help();
+		return 0;
+    }
+
     if (SDL_Init(SDL_INIT_VIDEO) < 0 || TTF_Init() < 0) {
         printf("Failed to initialize SDL or TTF: %s\n", SDL_GetError());
         return -1;
@@ -37,6 +42,17 @@ int main(int argc, char *argv[]) {
         return -1;
     }
 
+    GameState state = MENU;
+    int balance;
+    int bet;
+    char bet_input[256] = "$";
+    Card deck [NUM_CARDS];
+    Hand playerHand;
+    Hand dealerHand;
+    bool activeRound = false;
+
+    initialize_cards(deck, &playerHand, &dealerHand);
+
     bool running = true;
     SDL_Event event;
     while (running){
@@ -48,6 +64,7 @@ int main(int argc, char *argv[]) {
                     switch (event.key.keysym.sym){
                         case SDLK_RETURN:
                             printf("enter key pressed!");
+                            balance = 500;
                             state = BET;
                             break;
                         default:
@@ -60,10 +77,20 @@ int main(int argc, char *argv[]) {
             while(SDL_PollEvent(&event)) {
                 if (event.type == SDL_QUIT) {
                     running = false;
+                } else if (event.type == SDL_TEXTINPUT) {
+                    if (isdigit(event.text.text[0]) && strlen(bet_input) < sizeof(bet_input) - 1){
+                        strcat(bet_input, event.text.text);
+                    }
                 } else if (event.type == SDL_KEYDOWN) {
                     switch (event.key.keysym.sym){
+                        case SDLK_BACKSPACE:
+                            if (strlen(bet_input) > 0){
+                                bet_input[strlen(bet_input) - 1] = '\0';
+                            }
+                            break;
                         case SDLK_RETURN:
                             printf("enter key pressed!");
+                            int bet = atoi(&bet_input[1]);
                             state = PLAYER_TURN;
                             break;
                         default:
@@ -74,21 +101,42 @@ int main(int argc, char *argv[]) {
             }
         } else if (state == PLAYER_TURN) {
             while(SDL_PollEvent(&event)) {
+                if (activeRound == false){
+                    deal_player_hand(deck, &playerHand);
+                    deal_player_hand(deck, &dealerHand);
+                    activeRound = true;
+                }
+                if (checkBust(playerHand)){
+                    printf("PLAYER BUST!");
+                    state = LOSE_BUST;
+                }
                 if (event.type == SDL_QUIT) {
                     running = false;
                 } else if (event.type == SDL_KEYDOWN) {
                     switch (event.key.keysym.sym){
-                        case SDLK_w:
-                            printf("w key pressed!");
-                            state = WIN;
+                        case SDLK_h:
+                            draw_card(deck, &playerHand);
+                            printf("h key pressed!");
+                            printf("The current value of player hand is, %d", playerHand.value);
                             break;
-                        case SDLK_b:
-                            printf("b key was pressed");
-                            state = LOSE_BUST;
-                            break;
-                        case SDLK_d:
-                            printf("the d key was pressed");
-                            state = LOSE_DEALWIN;
+                        case SDLK_s:
+                            printf("the s key was pressed!");
+                            play_dealer(deck, &dealerHand);
+                            //this below should be a function tbh
+                            if (checkBust(dealerHand)){
+                                printf("dealer bust!");
+                                state = WIN;
+                            } else if (dealerHand.value == playerHand.value){
+                                printf("Push!");
+                                state = PUSH;
+                            } else if (dealerHand.value > playerHand.value){
+                                printf("dealer wins!");
+                                state = LOSE_DEALWIN;
+                            } else if (dealerHand.value < playerHand.value){
+                                printf("Player wins!!");
+                                state = WIN;
+                            }
+                            activeRound = false;
                             break;
                         default:
                             printf("The %d key was pressed", event.key.keysym.sym);
@@ -103,6 +151,7 @@ int main(int argc, char *argv[]) {
                 } else if (event.type == SDL_KEYDOWN) {
                     switch (event.key.keysym.sym){
                         case SDLK_RETURN:
+                            balance += bet;
                             printf("enter key pressed!");
                             state = CONTINUE;
                             break;
@@ -118,13 +167,10 @@ int main(int argc, char *argv[]) {
                     running = false;
                 } else if (event.type == SDL_KEYDOWN) {
                     switch (event.key.keysym.sym){
-                        case SDLK_c:
-                            printf("c key pressed!");
+                        case SDLK_RETURN:
+                            balance -= bet;
+                            printf("enter key pressed!");
                             state = CONTINUE;
-                            break;
-                        case SDLK_g:
-                            printf("the g key was pressed!");
-                            state = GAME_OVER;
                             break;
                         default:
                             printf("The %d key was pressed", event.key.keysym.sym);
@@ -138,13 +184,26 @@ int main(int argc, char *argv[]) {
                     running = false;
                 } else if (event.type == SDL_KEYDOWN) {
                     switch (event.key.keysym.sym){
-                        case SDLK_c:
-                            printf("the c key pressed!");
+                        case SDLK_RETURN:
+                            balance -= bet;
+                            printf("enter key pressed!");
                             state = CONTINUE;
                             break;
-                        case SDLK_g:
-                            printf("the g key was pressed");
-                            state = GAME_OVER;
+                        default:
+                            printf("The %d key was pressed", event.key.keysym.sym);
+                            break;
+                    }
+                }
+            }
+        } else if (state == PUSH) {
+            while(SDL_PollEvent(&event)) {
+                if (event.type == SDL_QUIT) {
+                    running = false;
+                } else if (event.type == SDL_KEYDOWN) {
+                    switch (event.key.keysym.sym){
+                        case SDLK_RETURN:
+                            printf("enter key pressed!");
+                            state = BET;
                             break;
                         default:
                             printf("The %d key was pressed", event.key.keysym.sym);
@@ -189,7 +248,7 @@ int main(int argc, char *argv[]) {
                 }
             }
         }
-        render_game(renderer, font, state);
+        render_game(renderer, font, state, bet_input);
         SDL_RenderPresent(renderer);
 
     }

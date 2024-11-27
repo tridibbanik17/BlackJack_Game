@@ -12,7 +12,8 @@ typedef enum {
     LOSE_BUST,
     LOSE_DEALWIN,
     CONTINUE,
-    GAME_OVER
+    GAME_OVER,
+    PUSH
 } GameState;
 
 void render_text(SDL_Renderer *renderer, TTF_Font *font, const char *text, int x, int y) {
@@ -27,13 +28,14 @@ void render_text(SDL_Renderer *renderer, TTF_Font *font, const char *text, int x
     SDL_DestroyTexture(texture);
 }
 
-void render_game(SDL_Renderer *renderer, TTF_Font *font, GameState state){
+void render_game(SDL_Renderer *renderer, TTF_Font *font, GameState state, char* bet_input){
     SDL_SetRenderDrawColor(renderer, 0, 128, 0, 255); // Green background
     SDL_RenderClear(renderer);
     if (state == MENU){
         render_text(renderer, font, "Welcome to Blackjack! (enter to continue)", 100, 50);
     } else if (state == BET){
         render_text(renderer, font, "How much would you like to bet? (enter to continue)", 100, 50);
+        render_text(renderer, font, bet_input, 100, 550);
     } else if (state == PLAYER_TURN) {
         render_text(renderer, font, "Player turn (w to win, b to bust, d to dealer win)", 100, 50);
     } else if (state == WIN) {
@@ -42,6 +44,8 @@ void render_game(SDL_Renderer *renderer, TTF_Font *font, GameState state){
         render_text(renderer, font, "BUST! You've lost (c if money, g if no money)", 100, 50);
     } else if (state == LOSE_DEALWIN) {
         render_text(renderer, font, "Dealer wins! You've lost (c if money, g is no money)", 100, 50);
+    } else if (state == PUSH) {
+        render_text(renderer, font, "Push! All bets returned (enter to continue)", 100, 50);
     } else if (state == CONTINUE) {
         render_text(renderer, font, "Keep playing ?? (y to keep playing, n to stop)", 100, 50);
     } else if (state == GAME_OVER) {
