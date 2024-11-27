@@ -14,16 +14,23 @@ jobs:
         run: make	
       
       - name: test game results
-        run: ./test_script > ./build_testing/test_results.txt   
+        run: ./test_script > ./build_testing/test_results/test_results_for_win_lose.txt
         
       - name: coverage
         run: make; gcc -o game_result_coverage --coverage testing_game_result.c game_result.c; ./test_script_coverage; gcov game_result_coverage-game_result.c > coverage_report.txt
 
+      # Artifacts
       - name: upload blackjack			
         uses: actions/upload-artifact@v4	
         with:
           name: Blackjack			
           path: ./blackjack	
+
+      - name: upload test results			
+        uses: actions/upload-artifact@v4	
+        with:
+          name: Test Results			
+          path: ./test_results.txt	
 
       - name: upload coverage
         uses: actions/upload-artifact@v4	
