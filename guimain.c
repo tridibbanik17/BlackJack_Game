@@ -51,8 +51,7 @@ int main(int argc, char *argv[]) {
     Hand dealerHand;
     bool activeRound = false;
 
-    initialize_cards(deck, &playerHand, &dealerHand);
-
+    
     bool running = true;
     SDL_Event event;
     while (running){
@@ -75,6 +74,7 @@ int main(int argc, char *argv[]) {
             }
         } else if (state == BET){
             while(SDL_PollEvent(&event)) {
+                initialize_cards(deck, &playerHand, &dealerHand);
                 if (event.type == SDL_QUIT) {
                     running = false;
                 } else if (event.type == SDL_TEXTINPUT) {
@@ -90,7 +90,8 @@ int main(int argc, char *argv[]) {
                             break;
                         case SDLK_RETURN:
                             printf("enter key pressed!");
-                            int bet = atoi(&bet_input[1]);
+                            //smt here
+                            int bet = atoi(bet_input);
                             state = PLAYER_TURN;
                             break;
                         default:
@@ -168,7 +169,10 @@ int main(int argc, char *argv[]) {
                 } else if (event.type == SDL_KEYDOWN) {
                     switch (event.key.keysym.sym){
                         case SDLK_RETURN:
-                            balance -= bet;
+                            printf("The balance before subtraction is: %d", balance);
+                            printf("The current bet is: %d", bet);
+                            balance = balance - bet;
+                            printf("The current balance is: %d", balance);
                             printf("enter key pressed!");
                             if (balance > 0){
                                 state = CONTINUE;
@@ -257,7 +261,7 @@ int main(int argc, char *argv[]) {
                 }
             }
         }
-        render_game(renderer, font, state, bet_input);
+        render_game(renderer, font, state, bet_input, balance, &playerHand, &dealerHand);
         SDL_RenderPresent(renderer);
 
     }

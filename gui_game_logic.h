@@ -11,6 +11,7 @@
 #define NUM_CHARLIE 5 // max hand size
 
 #include "cardStructs.h"
+#include <stdbool.h>
 
 // Function declarations
 void initialize_cards(Card *deck, Hand *playerHand , Hand *dealerHand);
