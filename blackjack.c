@@ -112,7 +112,13 @@ void blackjack_manager() {
 
 
 // command line call
-int main() {
+int main(int argc, char *argv[]) {
+  
+    if(argc > 1 && strcmp(argv[1], "--help") == 0){
+		display_help();
+		exit(0);
+    }
+    
     blackjack_manager();
     return 0;
 }
