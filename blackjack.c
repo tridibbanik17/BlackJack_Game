@@ -153,8 +153,8 @@ void play_blackjack(int *balance) {
 
 void blackjack_manager() {
     int balance = 500;
-    printf("Welcome to Blackjack!\n");
-    printf("\nBalance: $%d\n", balance);
+    printf("\nWelcome to Blackjack!\n");
+    printf("Balance: $%d\n", balance);
     
     play_blackjack(&balance);
 
