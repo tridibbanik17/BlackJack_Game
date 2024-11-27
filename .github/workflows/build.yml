@@ -13,11 +13,24 @@ jobs:
       - name: build blackjack			
         run: make	
       
-      - name: test script
-        run: ./build_testing/test_script > ./build_testing/test_results.txt        
+      - name: test game results
+        run: ./test_script > ./build_testing/test_results.txt   
+        
+      - name: coverage
+        run: make; gcc -o game_result_coverage --coverage testing_game_result.c game_result.c; ./test_script_coverage; gcov game_result_coverage-game_result.c > coverage_report.txt
 
-      - name: upload binary			
+      - name: upload blackjack			
         uses: actions/upload-artifact@v4	
         with:
           name: Blackjack			
           path: ./blackjack	
+
+      - name: upload coverage
+        uses: actions/upload-artifact@v4	
+        with:
+          name: Game Results Covereage
+          path: ./coverage_report.txt	
+
+      
+
+          
