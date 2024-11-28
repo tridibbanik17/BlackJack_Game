@@ -3,11 +3,15 @@ Lines executed:100.00% of 32
 Creating 'card_handler.c.gcov'
 
 Lines executed:100.00% of 32
+
+
 File 'game_result.c'
 Lines executed:85.71% of 28
 Creating 'game_result.c.gcov'
 
 Lines executed:85.71% of 28
+
+
 File 'blackjack.c'
 Lines executed:100.00% of 62
 Creating 'blackjack.c.gcov'

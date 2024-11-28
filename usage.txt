@@ -16,6 +16,11 @@ Dealer's Turn:
 1. The dealer reveals their face-down card and must hit until their hand reaches at least 17.
 2. If the dealer's hand exceeds 21, they bust, and the player wins.
 
+Betting
+1. If the player enters 0 as their bet amount, it is considered $100 by default.
+2. The player cannot enter a negative number as their bet amount.
+3. The bet amount must be an integer, not a float or any other type.
+
 Winning
 1. If the player does not exceed 21 after having their fifth card in hand, they automatically win. This way of winning is called a Charlie.
 2. If the player’s hand is closer to 21 than the dealer’s at any point of the game, the player wins and earns a 1:1 payout. For example, if the player bets $1k, after winning the player earns $2k.

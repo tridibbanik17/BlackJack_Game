@@ -10,31 +10,32 @@
     initialization.
 */
 
-/* get_input
- *
- * returns whether user input is yes or not
- */
- bool get_input(){
-    char input;
-    scanf(" %c", &input);
-    if (input == 'y' || input == 'Y') {
-        return true;
-    }
-    else if(input == 'n' || input == 'N'){
-	return false;
-    }
-    else{
-	printf("Invalid input. Please enter 'y' or 'n'.\n");
-        return get_input();
-    }
-}
-
 int get_initial_bet() {
-    // handle initial bet
-    int initialBet = 0;
-    printf("Enter the bet amount: $");
-    scanf("%d", &initialBet);
-    return initialBet != 0 ? initialBet : 100;
+    int initialBet;
+
+    while (true) { // Loop until valid input is provided
+        printf("Enter the bet amount (must be a positive integer): $");
+
+        // Validate input using scanf
+        if (scanf("%d", &initialBet) == 1) {
+            // Check if the value is positive
+            if (initialBet > 0) {
+                return initialBet; // Valid positive integer
+            } else if (initialBet == 0) {
+                printf("Defaulting bet to $100 since you entered 0.\n");
+                return 100; // Default value for 0
+            } else {
+                // Negative number entered
+                printf("Invalid input! The bet must be a positive integer.\n");
+            }
+        } else {
+            // Non-integer input entered
+            printf("Invalid input! Please enter a valid positive integer.\n");
+
+            // Clear the input buffer
+            while (getchar() != '\n');
+        }
+    }
 }
 
 void deal_player_hand(Card *deck, Hand *playerHand) {
@@ -101,8 +102,21 @@ void player_hit_loop(Card *deck, Hand *playerHand) {
     char continuePlaying;
 
     do {
-        printf("Would you like to draw another card? (y/n): ");
-        scanf(" %c", &continuePlaying);
+        // Loop to ensure valid input
+        while (true) {
+            printf("Would you like to draw another card? (y/n): ");
+            scanf(" %c", &continuePlaying);
+
+            // Check if input is valid
+            if (continuePlaying == 'y' || continuePlaying == 'Y' || 
+                continuePlaying == 'n' || continuePlaying == 'N') {
+                break; // Exit the validation loop if valid
+            } else {
+                printf("Invalid input! Please enter 'y' or 'n'.\n");
+                // Clear input buffer in case of invalid input
+                while (getchar() != '\n');
+            }
+        }
         if (continuePlaying == 'y' || continuePlaying == 'Y') {
             draw_card(deck, playerHand);
             printf("You drew: %s\n", playerHand->cards[playerHand->cardCount - 1].name);
@@ -116,6 +130,7 @@ void player_hit_loop(Card *deck, Hand *playerHand) {
     } while (continuePlaying == 'y' || continuePlaying == 'Y');
 }
 
+
 void get_result(Hand *dealerHand, Hand *playerHand, int *balance){
 	int payout = playerHand->bet;
     	char *result_msg = game_result(playerHand, dealerHand, &payout);
@@ -124,6 +139,24 @@ void get_result(Hand *dealerHand, Hand *playerHand, int *balance){
     	int balanceDiff =  (payout - playerHand->bet);
     	*balance += balanceDiff;
     	printf("You bet $%d and earned: $%d\n", playerHand->bet, balanceDiff);
+}
+
+// Function to print the cards in a hand and its total value
+void reveal_hand(Hand *hand, const char *card_holder) {
+    printf("%s's hand: ", card_holder); // Print whose hand is holding a particular set of cards (i.e., Player or Dealer)
+    for (int i = 0; i < hand->cardCount; i++) {
+        printf("%s, ", hand->cards[i].name); // Print each card in the hand
+    }
+    printf("\nValue: %d\n", hand->value); // Print the total value of the hand
+}
+
+// Function for the dealer to play its turn
+void play_dealer(Card *deck, Hand *dealerHand) {
+    // Dealer must draw cards until their hand value is at least 17
+    while (dealerHand->value < 17) {
+        draw_card(deck, dealerHand);
+    }
+    reveal_hand(dealerHand, "Dealer");
 }
 
 // main game logic
@@ -180,13 +213,13 @@ void play_blackjack(int *balance) {
 
 void blackjack_manager() {
     int balance = 500;
-    printf("Welcome to Blackjack!\n");
-    printf("\nBalance: $%d\n", balance);
+    printf("\nWelcome to Blackjack!\n");
+    printf("Balance: $%d\n", balance);
     
     play_blackjack(&balance);
 
     while (balance > 0) {
-        printf("Continue? (y/n): ");
+        printf("Continue? \n");
         if (get_input() == false) {
             break;
         }
