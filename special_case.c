@@ -12,7 +12,7 @@
  *
  * Split functionality - if player's first two cards are of the same rank, they can choose to treat them as two separate hands. The original bet amount goes on one hand and an equal bet must be made on the other.
  * 
- * Doubling down - after player's first two cards are dealt, player may choose to double their bet amount and end the round after getting dealt one more card.
+ * Doubling down - after player's first two cards are dealt, player may choose to double their bet amount and end the round after getting dealt one more card. Player can not double down on a split hand.
  */
 
 
@@ -21,12 +21,12 @@
  * Checks if player is initally dealt two of the same cards and meets requirements for split. Returns 1 if split is wanted.
  */
 int check_split(Card *deck, Hand *playerHand, int *balance){
-    if(playerHand->cards[0].rankIndex == playerHand->cards[1].rankIndex){
-        printf("You have two %s. Would you like to split? (y/n): ", playerHand->cards[0].name);
-        if(!get_true_input()){
-                return 0;
-        }
-    }else{
+    if(playerHand->cards[0].rankIndex != playerHand->cards[1].rankIndex){
+    	return 0;
+    }	
+	    
+    printf("You have two %s. Would you like to split? ", playerHand->cards[0].name);
+    if(!get_input()){
     	return 0;
     }
 
@@ -35,6 +35,7 @@ int check_split(Card *deck, Hand *playerHand, int *balance){
         printf("Not enough balance to split.\n");
         return 0;
     }
+
     return 1;
 }
 
@@ -94,15 +95,17 @@ void ace_adjuster(Hand* hand){
  * Returns 1 if player wants to double down. If so, readjusts bet for double down
  */
 int double_down(Hand* hand,int *balance){
-	if (hand->cardCount == 2) {
-		printf("Would you like to double down? (y/n): ");
-		if(!get_true_input()) {
-			return 0;
-		}
-	}
-	else{
+	if (hand->cardCount != 2) {
 		return 0;
 	}
+	
+	printf("Would you like to double down? ");
+    	//*asked = true;
+
+    	if(!get_input()) {
+        	return 0;
+    	}
+
 	// doubling bet
 	if(*balance < hand->bet){
       		printf("Not enough balance to double down.\n");

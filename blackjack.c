@@ -56,14 +56,8 @@ void hit(Card *deck, Hand *playerHand){
 
 void player_hit_loop(Card *deck, Hand *playerHand, int *balance) {
     char continuePlaying;
-    int double_result; // if player wants to double down
-    do {
-	double_result = double_down(playerHand, balance);
-	if(double_result){
-		hit(deck, playerHand);
-		break;
-	}
 
+    do{
         // Loop to ensure valid input
         while (true) {
             printf("Would you like to draw another card? (y/n): ");
@@ -136,8 +130,6 @@ void play_blackjack(int *balance) {
     playerHand.bet = initialBet;
 
     deal_player_hand(deck, &playerHand);
-    // checking if player wants to double down
-    int double_result = double_down(&playerHand, balance);
 
     // checking and handling for split hand
     int split_result = check_split(deck, &playerHand, balance);
@@ -154,9 +146,13 @@ void play_blackjack(int *balance) {
 	    printf("The value of your hand is: %d\n", splitHand.value);
             player_hit_loop(deck, &splitHand, balance);
     }else{
+	if(double_down(&playerHand, balance)){
+		hit(deck, &playerHand);
+	}
     	// player hit/stand loop
-	player_hit_loop(deck, &playerHand, balance);
-    	
+	else{
+		player_hit_loop(deck, &playerHand, balance);
+	}
     }
 
     // dealer's turn
@@ -184,7 +180,7 @@ void blackjack_manager() {
     play_blackjack(&balance);
 
     while (balance > 0) {
-        printf("Continue? \n");
+        printf("Start another round? \n");
         if (get_input() == false) {
             break;
         }

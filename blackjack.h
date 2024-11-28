@@ -42,7 +42,6 @@ void reveal_hand(Hand *hand, const char *card_holder);
 
 void display_help();
 bool get_input();
-bool get_true_input();
 
 void ace_adjuster(Hand* hand);
 void split_ace_adjuster(Hand* hand);

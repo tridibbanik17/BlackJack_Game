@@ -21,20 +21,10 @@ void display_help(){
 	printf("%s", help_txt);
 }
 
-/* get_true_input
+/* get_input
  *
  * returns whether user input is yes or not
  */
-bool get_true_input(){
-	char input;
-	scanf("%c", &input);
-        if (input == 'y' || input == 'Y') {
-		return true;
-	}
-	return false;
-}
-
-
 
 bool get_input() {
     char input;
