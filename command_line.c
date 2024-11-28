@@ -21,14 +21,26 @@ void display_help(){
 	printf("%s", help_txt);
 }
 
-/* get_input
+/* get_true_input
  *
  * returns whether user input is yes or not
  */
+bool get_true_input(){
+	char input;
+	scanf("%c", &input);
+        if (input == 'y' || input == 'Y') {
+		return true;
+	}
+	return false;
+}
+
+
+
 bool get_input() {
     char input;
     while (true) { // Loop until valid input is provided
-        printf("Enter your choice (y/n): ");                                        scanf(" %c", &input);
+        printf("Enter your choice (y/n): ");
+	scanf(" %c", &input);
 	// Check if the input is valid
         if (input == 'y' || input == 'Y') {
             return true;

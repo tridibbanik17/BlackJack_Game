@@ -11,11 +11,16 @@
 #define NUM_RANKS 13
 #define NUM_CHARLIE 5 // max hand size
 
+extern const char* SUITS[]; // declare external constants
+extern const char* RANKS[];
+
 // Card structure
 typedef struct {
     int isDrawn;
     int value;
     char name[20];
+    int rankIndex;  // index for the rank array
+    int suitIndex;  // index for the suit array
 } Card;
 
 // Hand structure
@@ -34,8 +39,14 @@ void draw_card(Card* deck, Hand* hand);
 char *game_result(Hand *playerHand, Hand *dealerHand, int *payout);
 void play_dealer(Card *deck, Hand *dealerHand);
 void reveal_hand(Hand *hand, const char *card_holder);
-void display_help();
-void split_ace_adjuster(Hand* hand);
-bool get_input();
 
+void display_help();
+bool get_input();
+bool get_true_input();
+
+void ace_adjuster(Hand* hand);
+void split_ace_adjuster(Hand* hand);
+int check_split(Card *deck, Hand *playerHand, int *balance);
+void handle_split(Card *deck, Hand *playerHand, Hand *splitHand, int *balance);
+int double_down(Hand *hand, int *balance);
 #endif
