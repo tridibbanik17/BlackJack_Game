@@ -76,7 +76,7 @@ int check_split(Card *deck, Hand *playerHand, int *balance){
  * Splits a hand into two playing hands.
  */
 void handle_split(Card *deck, Hand *playerHand, Hand *splitHand, int *balance){
-    printf("You split your hand. Each hand starts with a bet of $%d.\n", playerHand->bet);
+    printf("You split your hand. Each hand starts with a bet of $%d.\n\n", playerHand->bet);
     *balance -= playerHand->bet;
 
     // initialize the split hand
@@ -89,6 +89,12 @@ void handle_split(Card *deck, Hand *playerHand, Hand *splitHand, int *balance){
     splitHand->cardCount++;
     playerHand->cardCount--;
     splitHand->value += splitHand->cards[0].value;
+
+    // checking for aces
+    if(playerHand->value == 1){
+	    split_ace_adjuster(playerHand);
+	    split_ace_adjuster(splitHand);
+   }
 }
 
 void player_hit_loop(Card *deck, Hand *playerHand) {
@@ -137,14 +143,17 @@ void play_blackjack(int *balance) {
     deal_player_hand(deck, &playerHand);
 
     // checking and handling for split hand
-    int split_result = check_split(deck, &playerHand, balance); 
+    int split_result = check_split(deck, &playerHand, balance);
+    
     if(split_result){
 	    handle_split(deck, &playerHand, &splitHand, balance);
 	    
 	    printf("Playing first hand:\n");
+	    printf("The value of your hand is: %d\n", playerHand.value);
             player_hit_loop(deck, &playerHand);
-
+	    
             printf("\nPlaying split hand:\n");
+	    printf("The value of your hand is: %d\n", splitHand.value);
             player_hit_loop(deck, &splitHand);
     }
     else{
@@ -177,14 +186,14 @@ void blackjack_manager() {
     play_blackjack(&balance);
 
     while (balance > 0) {
-        printf("Continue? (y/n)\n");
+        printf("Continue? (y/n): ");
         if (get_input() == false) {
             break;
         }
         play_blackjack(&balance);
     }
     if (balance <= 0) {
-        printf("\nYou're broke. Bye\n");
+        printf("\nYou're broke. Bye.\n");
     } else {
         printf("You started with $500 and left with $%d\n", balance);
     }
@@ -195,8 +204,8 @@ void blackjack_manager() {
 int main(int argc, char *argv[]) {
   
     if(argc > 1 && strcmp(argv[1], "--help") == 0){
-		display_help();
-		exit(0);
+	display_help();
+	exit(0);
     }
     
     blackjack_manager();

@@ -34,5 +34,6 @@ char *game_result(Hand *playerHand, Hand *dealerHand, int *payout);
 void play_dealer(Card *deck, Hand *dealerHand);
 void reveal_hand(Hand *hand, const char *card_holder);
 void display_help();
+void split_ace_adjuster(Hand* hand);
 
 #endif
