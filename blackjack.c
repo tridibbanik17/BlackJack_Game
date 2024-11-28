@@ -10,27 +10,6 @@
     initialization.
 */
 
-// get_input returns whether user input is yes or not
-bool get_input() {
-    char input;
-    while (true) { // Loop until valid input is provided
-        printf("Enter your choice (y/n): ");
-        scanf(" %c", &input);
-
-        // Check if the input is valid
-        if (input == 'y' || input == 'Y') {
-            return true;
-        } else if (input == 'n' || input == 'N') {
-            return false;
-        } else {
-            // Invalid input: Print an error message and prompt again
-            printf("Invalid input! Please type 'y' for yes or 'n' for no.\n");
-            // Clear the input buffer
-            while (getchar() != '\n'); 
-        }
-    }
-}
-
 int get_initial_bet() {
     int initialBet;
 
@@ -68,6 +47,57 @@ void deal_player_hand(Card *deck, Hand *playerHand) {
     printf("The value of your hand is: %d\n", playerHand->value);
 }
 
+
+/* check_split
+ *
+ * Checks if player is initally dealt two of the same cards and meets requirements for split. Returns 1 if split is wanted.
+ */
+int check_split(Card *deck, Hand *playerHand, int *balance){
+    // NEED TO CHECK FOR SAME RANK -> ONLY CHECKS FOR POINT VALUE RN
+    if(playerHand->cards[0].value == playerHand->cards[1].value){
+        printf("You have two %s. Would you like to split? (y/n): ", playerHand->cards[0].name);
+        if(!get_input()){
+                return 0;
+        }
+    }
+    else{
+    	return 0;
+    }
+    
+    // splitting hand places an additional bet
+    if(*balance < playerHand->bet){
+      printf("Not enough balance to split.\n");
+        return 0;
+    }
+    return 1;
+}
+
+/* handle_split
+ *
+ * Splits a hand into two playing hands.
+ */
+void handle_split(Card *deck, Hand *playerHand, Hand *splitHand, int *balance){
+    printf("You split your hand. Each hand starts with a bet of $%d.\n\n", playerHand->bet);
+    *balance -= playerHand->bet;
+
+    // initialize the split hand
+    initialize_hand(splitHand);
+    splitHand->bet = playerHand->bet;
+
+    // move second card to split hand
+    playerHand->value -= playerHand->cards[1].value;
+    splitHand->cards[0] = playerHand->cards[1];
+    splitHand->cardCount++;
+    playerHand->cardCount--;
+    splitHand->value += splitHand->cards[0].value;
+
+    // checking for aces
+    if(playerHand->value == 1){
+	    split_ace_adjuster(playerHand);
+	    split_ace_adjuster(splitHand);
+   }
+}
+
 void player_hit_loop(Card *deck, Hand *playerHand) {
     char continuePlaying;
 
@@ -100,6 +130,17 @@ void player_hit_loop(Card *deck, Hand *playerHand) {
     } while (continuePlaying == 'y' || continuePlaying == 'Y');
 }
 
+
+void get_result(Hand *dealerHand, Hand *playerHand, int *balance){
+	int payout = playerHand->bet;
+    	char *result_msg = game_result(playerHand, dealerHand, &payout);
+    	printf("\n%s\n", result_msg);
+
+    	int balanceDiff =  (payout - playerHand->bet);
+    	*balance += balanceDiff;
+    	printf("You bet $%d and earned: $%d\n", playerHand->bet, balanceDiff);
+}
+
 // Function to print the cards in a hand and its total value
 void reveal_hand(Hand *hand, const char *card_holder) {
     printf("%s's hand: ", card_holder); // Print whose hand is holding a particular set of cards (i.e., Player or Dealer)
@@ -122,7 +163,7 @@ void play_dealer(Card *deck, Hand *dealerHand) {
 void play_blackjack(int *balance) {
     // initialization
     Card deck[NUM_CARDS];
-    Hand playerHand;
+    Hand playerHand, splitHand;
     Hand dealerHand;
     srand((unsigned int)time(NULL)); // Setup random seed
 
@@ -134,20 +175,39 @@ void play_blackjack(int *balance) {
 
     deal_player_hand(deck, &playerHand);
 
-    // player hit/stand loop
-    player_hit_loop(deck, &playerHand);
+    // checking and handling for split hand
+    int split_result = check_split(deck, &playerHand, balance);
+    
+    if(split_result){
+	    handle_split(deck, &playerHand, &splitHand, balance);
+	    
+	    printf("Playing first hand:\n");
+	    printf("The value of your hand is: %d\n", playerHand.value);
+            player_hit_loop(deck, &playerHand);
+	    
+            printf("\nPlaying split hand:\n");
+	    printf("The value of your hand is: %d\n", splitHand.value);
+            player_hit_loop(deck, &splitHand);
+    }
+    else{
+    	// player hit/stand loop
+    	player_hit_loop(deck, &playerHand);
+    }
 
     // dealer's turn
     printf("\nDealer's Turn:\n");
     play_dealer(deck, &dealerHand);
 
     // handle the game result
-    int payout = playerHand.bet;
-    char *result_msg = game_result(&playerHand, &dealerHand, &payout);
-    printf("\n%s\n", result_msg);
-    int balanceDiff =  (payout - playerHand.bet);
-    *balance += balanceDiff;
-    printf("You bet $%d and earned: $%d\n", playerHand.bet, balanceDiff);
+    if(split_result) printf("\nFirst hand:");
+
+    get_result(&dealerHand, &playerHand, balance);
+    
+    if(split_result){
+	    printf("\nSplit hand:");
+            get_result(&dealerHand, &splitHand, balance);
+    }
+
     printf("Current balance: $%d\n\n", *balance);
 }
 
@@ -166,7 +226,7 @@ void blackjack_manager() {
         play_blackjack(&balance);
     }
     if (balance <= 0) {
-        printf("\nYou're broke. Bye\n");
+        printf("\nYou're broke. Bye.\n");
     } else {
         printf("You started with $500 and left with $%d\n", balance);
     }
@@ -177,8 +237,8 @@ void blackjack_manager() {
 int main(int argc, char *argv[]) {
   
     if(argc > 1 && strcmp(argv[1], "--help") == 0){
-		display_help();
-		exit(0);
+	display_help();
+	exit(0);
     }
     
     blackjack_manager();

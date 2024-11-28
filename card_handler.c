@@ -33,14 +33,16 @@ void initialize_hand(Hand* hand) {
     hand->bet = 0;
 }
 
-//void initialize_hand(Player* player){
-//	player->hands = malloc(sizeof(Hand));
-//}
+// readjusting ace values for a hand of aces being split
+void split_ace_adjuster(Hand* hand){
+	hand->value = 11;
+	hand->cards[0].value = 11;
+}
 
 // adjusting hand value based on special value aces
 void ace_adjuster(Hand* hand){
         for(int i=0; i<hand->cardCount; i++){
-                if(hand->cards[i].value == 11){
+		if(hand->cards[i].value == 11){
 			if(hand->value > 21){
 				hand->value -= 10; // adjusting hand value
                 		hand->cards[i].value -= 10; // adjusting ace value from 11 to 1

@@ -1,5 +1,6 @@
 #ifndef BLACKJACK_H
 #define BLACKJACK_H
+#include <stdbool.h>
 
 /*  Define constraints, structs, and
     functions for the blackjack utility
@@ -34,5 +35,7 @@ char *game_result(Hand *playerHand, Hand *dealerHand, int *payout);
 void play_dealer(Card *deck, Hand *dealerHand);
 void reveal_hand(Hand *hand, const char *card_holder);
 void display_help();
+void split_ace_adjuster(Hand* hand);
+bool get_input();
 
 #endif
