@@ -3,8 +3,17 @@
 #include "blackjack.h"
 #include<time.h>
 
-// Function to get the game result
-// Side-effect, updates payout
+// Function: game_result
+// Determines the outcome of the game based on the player's and dealer's hand values and card counts.
+// Updates the payout amount based on the result.
+//
+// Parameters:
+// - playerHand: Pointer to the player's hand structure (contains value and card count).
+// - dealerHand: Pointer to the dealer's hand structure (contains value and card count).
+// - payout: Pointer to an integer representing the current bet amount; updated based on the result.
+//
+// Returns:
+// - A string indicating the result of the game (e.g., "Bust! Player lost.", "Blackjack! Player wins.").
 char *game_result(Hand *playerHand, Hand *dealerHand, int *payout) {
     // bust if hand value exceeds 21
     // If the dealer busts, player wins. 

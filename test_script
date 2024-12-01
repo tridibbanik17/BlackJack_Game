@@ -1,60 +1,62 @@
 #!/bin/bash
 
 # Declare test counters
-declare -i tc=0
-declare -i fails=0
+declare -i tc=0  # Counter for the number of test cases executed
+declare -i fails=0  # Counter for the number of failed test cases
 
 ############################################
 # Function to run a single test
 ############################################
 test() {
-    tc=tc+1
+    tc=tc+1  # Increment test case counter
 
-    local COMMAND=$1
-    local INP=$2
-    local EX_OUT=$3
-    local EX_ERR=$4
+    # Input arguments for the test function
+    local COMMAND=$1  # The command or program to test
+    local INP=$2  # File containing the test input
+    local EX_OUT=$3  # File containing the expected standard output
+    local EX_ERR=$4  # File containing the expected standard error
 
-    # Determine expected return code
-    EX_RET=1
-    if [[ ! -s $EX_ERR ]]; then
-        EX_RET=0
+    # Determine the expected return code
+    EX_RET=1  # Default expected return code for error cases
+    if [[ ! -s $EX_ERR ]]; then  # If the expected error file is empty, assume success
+        EX_RET=0  # Set expected return code for successful execution
     fi
 
-    # Run the command
-    $COMMAND < $INP > test_out.txt 2> test_err.txt
-    RET=$?
+    # Execute the command with the test input
+    $COMMAND < $INP > test_out.txt 2> test_err.txt  # Redirect standard output and error to temporary files
+    RET=$?  # Capture the return code of the command
 
-    # Check return code
+    # Check if the return code matches the expected value
     if [[ $RET != $EX_RET ]]; then
-        echo "TC $tc Failed (Return Code)"
-        echo "Returned $RET, Expected $EX_RET"
-        echo "-----------"
-        fails=$fails+1
+        echo "TC $tc Failed (Return Code)"  # Log failure for mismatched return code
+        echo "Returned $RET, Expected $EX_RET"  # Display the mismatch details
+        echo "-----------"  # Separator for clarity in logs
+        fails=$fails+1  # Increment failure counter
         return
     fi
 
-    # Check standard output
-    DIFF=$(diff test_out.txt $EX_OUT)
+    # Check if the actual standard output matches the expected output
+    DIFF=$(diff test_out.txt $EX_OUT)  # Compare actual and expected standard output
     if [[ $DIFF != '' ]]; then
-        echo "TC $tc Failed (Standard Output)"
-        echo "$DIFF"
-        echo "-----------"
-        fails=$fails+1
+        echo "TC $tc Failed (Standard Output)"  # Log failure for mismatched standard output
+        echo "$DIFF"  # Display the differences
+        echo "-----------"  # Separator for clarity in logs
+        fails=$fails+1  # Increment failure counter
         return
     fi
 
-    # Check standard error
-    DIFF=$(diff test_err.txt $EX_ERR)
+    # Check if the actual standard error matches the expected error
+    DIFF=$(diff test_err.txt $EX_ERR)  # Compare actual and expected standard error
     if [[ $DIFF != '' ]]; then
-        echo "TC $tc Failed (Standard Error)"
-        echo "$DIFF"
-        echo "-----------"
-        fails=$fails+1
+        echo "TC $tc Failed (Standard Error)"  # Log failure for mismatched standard error
+        echo "$DIFF"  # Display the differences
+        echo "-----------"  # Separator for clarity in logs
+        fails=$fails+1  # Increment failure counter
         return
     fi
 
-    echo "TC $tc Passed"
+    # Log success if all checks pass
+    echo "TC $tc Passed"  # Indicate successful test case execution
 }
 
 ############################################
@@ -89,7 +91,7 @@ test './testing_game_result' './build_testing/input/inp8.txt' './build_testing/o
 # Clean up
 ############################################
 
-rm test_out.txt test_err.txt
+rm test_out.txt test_err.txt  # Remove temporary files created during test execution
 
-# Return code
-exit $fails
+# Exit script with the number of failed test cases
+exit $fails  # Return the total count of failed test cases as the exit status
