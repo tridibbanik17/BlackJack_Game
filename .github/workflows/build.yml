@@ -19,6 +19,8 @@ jobs:
       - name: coverage
         run: make; gcc -o game_result_coverage --coverage testing_game_result.c game_result.c; ./test_script_coverage; gcov game_result_coverage-game_result.c > coverage_report.txt
 
+      - name: test special case
+        run: ./test_script_check_split > ./build_testing/test_results/test_results_for_check_split.txt; ./test_script_handle_split > ./build_testing/test_results/test_results_for_handle_split.txt; ./test_script_double_down > ./build_testing/test_results/test_results_for_double_down.txt;
       # Artifacts
       - name: upload blackjack			
         uses: actions/upload-artifact@v4	
