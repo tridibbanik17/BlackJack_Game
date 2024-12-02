@@ -50,7 +50,7 @@ void display_help(){
         "  - Input your bet amount when prompted.\n\n"
 
         "Ending the Game:\n"
-        "  - The game continues until you choose to stop or you run out of balance.\n"
+        "  - The game continues until you choose to stop or you run out of balance.\n";
 
     printf("%s", help_txt);
 }
