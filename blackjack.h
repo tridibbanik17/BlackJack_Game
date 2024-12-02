@@ -1,7 +1,6 @@
 #ifndef BLACKJACK_H
 #define BLACKJACK_H
 #include <stdbool.h>
-#include "cardStructs.h"
 
 /*  Define constraints, structs, and
     functions for the blackjack utility
