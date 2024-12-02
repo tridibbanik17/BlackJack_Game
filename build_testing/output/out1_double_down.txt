@@ -1,0 +1,3 @@
+Would you like to double down? Your bet has been doubled to: $100
+Player's final bet: $100
+Remaining balance: $0
