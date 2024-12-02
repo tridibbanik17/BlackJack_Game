@@ -3,17 +3,28 @@ Lines executed:100.00% of 32
 Creating 'card_handler.c.gcov'
 
 Lines executed:100.00% of 32
-
-
-File 'game_result.c'
-Lines executed:85.71% of 28
-Creating 'game_result.c.gcov'
-
-Lines executed:85.71% of 28
-
-
 File 'blackjack.c'
 Lines executed:100.00% of 62
 Creating 'blackjack.c.gcov'
 
 Lines executed:100.00% of 62
+File 'testing_double_down.c'
+Lines executed:88.89% of 27
+Creating 'testing_double_down.c.gcov'
+
+Lines executed:88.89% of 27
+File 'testing_handle_split.c'
+Lines executed:86.05% of 43
+Creating 'testing_handle_split.c.gcov'
+
+Lines executed:86.05% of 43
+File 'testing_check_split.c'
+Lines executed:100.00% of 27
+Creating 'testing_check_split.c.gcov'
+
+Lines executed:100.00% of 27
+File 'game_result.c'
+Lines executed:88.24% of 17
+Creating 'game_result.c.gcov'
+
+Lines executed:88.24% of 17
