@@ -1,0 +1,5 @@
+Enter initial balance: You split your hand. Each hand starts with a bet of $50.
+
+Player hand: Value=10, CardCount=1
+Split hand: Value=10, CardCount=1
+Remaining balance: 950

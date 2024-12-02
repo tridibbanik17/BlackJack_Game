@@ -1,0 +1,87 @@
+#!/bin/bash
+
+# Declare test counters
+declare -i tc=0  # Counter for the number of test cases executed
+declare -i fails=0  # Counter for the number of failed test cases
+
+############################################
+# Function to run a single test
+############################################
+test() {
+    tc=tc+1  # Increment test case counter
+
+    # Input arguments for the test function
+    local COMMAND=$1  # The command or program to test
+    local INP=$2  # File containing the test input
+    local EX_OUT=$3  # File containing the expected standard output
+    local EX_ERR=$4  # File containing the expected standard error
+
+    # Determine the expected return code
+    EX_RET=0  # Assume success unless an expected error file exists and is non-empty
+    if [[ -s $EX_ERR ]]; then
+        EX_RET=1  # Expected failure if error file contains data
+    fi
+
+    # Execute the command with the test input
+    $COMMAND < $INP > test_out.txt 2> test_err.txt  # Redirect standard output and error to temporary files
+    RET=$?  # Capture the return code of the command
+
+    # Check if the return code matches the expected value
+    if [[ $RET != $EX_RET ]]; then
+        echo "TC $tc Failed (Return Code)"  # Log failure for mismatched return code
+        echo "Returned $RET, Expected $EX_RET"  # Display the mismatch details
+        echo "-----------"  # Separator for clarity in logs
+        fails=$fails+1  # Increment failure counter
+        return
+    fi
+
+    # Check if the actual standard output matches the expected output
+    DIFF=$(diff test_out.txt $EX_OUT)  # Compare actual and expected standard output
+    if [[ $DIFF != '' ]]; then
+        echo "TC $tc Failed (Standard Output)"  # Log failure for mismatched standard output
+        echo "$DIFF"  # Display the differences
+        echo "-----------"  # Separator for clarity in logs
+        fails=$fails+1  # Increment failure counter
+        return
+    fi
+
+    # Check if the actual standard error matches the expected error
+    DIFF=$(diff test_err.txt $EX_ERR)  # Compare actual and expected standard error
+    if [[ $DIFF != '' ]]; then
+        echo "TC $tc Failed (Standard Error)"  # Log failure for mismatched standard error
+        echo "$DIFF"  # Display the differences
+        echo "-----------"  # Separator for clarity in logs
+        fails=$fails+1  # Increment failure counter
+        return
+    fi
+
+    # Log success if all checks pass
+    echo "TC $tc Passed"  # Indicate successful test case execution
+}
+
+
+############################################
+# Test Cases
+############################################
+
+# Test 1: Check basic functionality (normal case)
+test './testing_handle_split' './build_testing/input/inp1_handle_split.txt' './build_testing/output/out1_handle_split.txt' './build_testing/error/empty.txt'
+
+# Test 2: Check for valid split
+test './testing_handle_split' './build_testing/input/inp2_handle_split.txt' './build_testing/output/out2_handle_split.txt' './build_testing/error/empty.txt'
+
+# Test 3: Check for a boundary case
+test './testing_handle_split' './build_testing/input/inp3_handle_split.txt' './build_testing/output/out3_handle_split.txt' './build_testing/error/empty.txt'
+
+# Test 4: Check for another boundary case
+test './testing_handle_split' './build_testing/input/inp4_handle_split.txt' './build_testing/output/out4_handle_split.txt' './build_testing/error/empty.txt'
+
+
+############################################
+# Clean up
+############################################
+
+rm test_out.txt test_err.txt  # Remove temporary files created during test execution
+
+# Exit script with the number of failed test cases
+exit $fails  # Return the total count of failed test cases as the exit status
