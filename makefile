@@ -4,10 +4,7 @@ all: blackjack testing_game_result
 	
 gui_blackjack: guimain.c screens.c command_line.c gui_game_logic.c screens.h cardStructs.h
 	gcc guimain.c screens.c command_line.c gui_game_logic.c -o test_gui -lSDL2 -lSDL2_ttf
-<<<<<<< HEAD
-	
-=======
->>>>>>> ea1a8a9137f2b0018fef289e35770ea154774437
+
 blackjack: blackjack.c card_handler.c command_line.c game_result.c special_case.c
 	gcc -o blackjack blackjack.c card_handler.c command_line.c game_result.c special_case.c
 
