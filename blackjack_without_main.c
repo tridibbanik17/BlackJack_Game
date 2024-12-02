@@ -222,23 +222,3 @@ void blackjack_manager() {
     if (balance <= 0) printf("\nYou're broke. Bye.\n");
     else printf("You started with $500 and left with $%d\n", balance);
 }
-
-/* 
- * Function: main
- * --------------
- * Entry point of the Blackjack program.
- * 
- * Parameters:
- *   int argc      - Number of command-line arguments.
- *   char *argv[]  - Array of command-line argument strings.
- * Returns: 
- *   int - Exit status of the program.
- */
-int main(int argc, char *argv[]) {
-    if (argc > 1 && strcmp(argv[1], "--help") == 0) {
-        display_help();
-        exit(0);
-    }
-    blackjack_manager();
-    return 0;
-}
