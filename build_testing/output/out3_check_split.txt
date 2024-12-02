@@ -1,0 +1,1 @@
+Enter card 1 name and rankIndex: Enter card 2 name and rankIndex: Enter bet amount: Result: 0

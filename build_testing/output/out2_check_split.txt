@@ -1,0 +1,1 @@
+Enter card 1 name and rankIndex: Enter card 2 name and rankIndex: Enter bet amount: You have two Ace. Would you like to split? Not enough balance to split. Result: 0

@@ -17,9 +17,9 @@ test() {
     local EX_ERR=$4  # File containing the expected standard error
 
     # Determine the expected return code
-    EX_RET=1  # Default expected return code for error cases
-    if [[ ! -s $EX_ERR ]]; then  # If the expected error file is empty, assume success
-        EX_RET=0  # Set expected return code for successful execution
+    EX_RET=0  # Assume success unless an expected error file exists and is non-empty
+    if [[ -s $EX_ERR ]]; then
+        EX_RET=1  # Expected failure if error file contains data
     fi
 
     # Execute the command with the test input
@@ -59,33 +59,19 @@ test() {
     echo "TC $tc Passed"  # Indicate successful test case execution
 }
 
+
 ############################################
 # Test Cases
 ############################################
 
-# Test 1: Player wins with higher value
-test './testing_game_result' './build_testing/input/inp1.txt' './build_testing/output/out1.txt' './build_testing/error/empty.txt'
+# Test 1: Check split functionality (normal case)
+test './testing_check_split' './build_testing/input/inp1_check_split.txt' './build_testing/output/out1_check_split.txt' './build_testing/error/empty.txt'
 
-# Test 2: Dealer wins
-test './testing_game_result' './build_testing/input/inp2.txt' './build_testing/output/out2.txt' './build_testing/error/empty.txt'
+# Test 2: Check for not enough balance to split
+test './testing_check_split' './build_testing/input/inp2_check_split.txt' './build_testing/output/out2_check_split.txt' './build_testing/error/empty.txt'
 
-# Test 3: Player busts
-test './testing_game_result' './build_testing/input/inp3.txt' './build_testing/output/out3.txt' './build_testing/error/empty.txt'
-
-# Test 4: 5-Card Charlie
-test './testing_game_result' './build_testing/input/inp4.txt' './build_testing/output/out4.txt' './build_testing/error/empty.txt'
-
-# Test 5: Blackjack win
-test './testing_game_result' './build_testing/input/inp5.txt' './build_testing/output/out5.txt' './build_testing/error/empty.txt'
-
-# Test 6: Invalid bet amount
-test './testing_game_result' './build_testing/input/inp6.txt' './build_testing/output/out6.txt' './build_testing/error/err6.txt'
-
-# Test 7: Invalid input
-test './testing_game_result' './build_testing/input/inp7.txt' './build_testing/output/out7.txt' './build_testing/error/err7.txt'
-
-# Test 8: Push result
-test './testing_game_result' './build_testing/input/inp8.txt' './build_testing/output/out8.txt' './build_testing/error/empty.txt'
+# Test 3: Check for invalid split (different ranks)
+test './testing_check_split' './build_testing/input/inp3_check_split.txt' './build_testing/output/out3_check_split.txt' './build_testing/error/empty.txt'
 
 ############################################
 # Clean up

@@ -82,9 +82,10 @@ void hit(Card *deck, Hand *playerHand) {
  * Parameters:
  *   Card *deck       - Pointer to the deck of cards.
  *   Hand *playerHand - Pointer to the player's hand structure.
+ *   int *balance     - Pointer to the player's current balance.
  * Returns: None
  */
-void player_hit_loop(Card *deck, Hand *playerHand) {
+void player_hit_loop(Card *deck, Hand *playerHand, int *balance) {
     char continuePlaying;
     do {
         while (true) {
@@ -171,46 +172,32 @@ void play_blackjack(int *balance) {
     Card deck[NUM_CARDS];
     Hand playerHand, splitHand;
     Hand dealerHand;
-
     srand((unsigned int)time(NULL));
     initialize_deck(deck);
     initialize_hand(&playerHand);
     initialize_hand(&dealerHand);
     int initialBet = get_initial_bet();
     playerHand.bet = initialBet;
-    
     deal_player_hand(deck, &playerHand);
-    draw_card(deck, &dealerHand);
-    draw_card(deck, &dealerHand);
-    
-    printf("Dealer's first card is %s, value of %d\n", dealerHand.cards[0].name, dealerHand.cards[0].value);
-    
     int split_result = check_split(deck, &playerHand, balance);
     if (split_result) {
         handle_split(deck, &playerHand, &splitHand, balance);
-        
-	printf("Playing first hand:\n");
-        player_hit_loop(deck, &playerHand);
-
+        printf("Playing first hand:\n");
+        player_hit_loop(deck, &playerHand, balance);
         printf("\nPlaying split hand:\n");
-        player_hit_loop(deck, &splitHand);
+        player_hit_loop(deck, &splitHand, balance);
     } else {
         if (double_down(&playerHand, balance)) hit(deck, &playerHand);
-        else player_hit_loop(deck, &playerHand);
+        else player_hit_loop(deck, &playerHand, balance);
     }
-    
-    if (playerHand.value < 21 && playerHand.cardCount < NUM_CHARLIE) {
-        printf("\nDealer's Turn:\n");
-        play_dealer(deck, &dealerHand);
-    }
-    
+    printf("\nDealer's Turn:\n");
+    play_dealer(deck, &dealerHand);
     if (split_result) printf("\nFirst hand:");
     get_result(&dealerHand, &playerHand, balance);
     if (split_result) {
         printf("\nSplit hand:");
         get_result(&dealerHand, &splitHand, balance);
     }
-    
     printf("Current balance: $%d\n\n", *balance);
 }
 
@@ -234,24 +221,4 @@ void blackjack_manager() {
     }
     if (balance <= 0) printf("\nYou're broke. Bye.\n");
     else printf("You started with $500 and left with $%d\n", balance);
-}
-
-/* 
- * Function: main
- * --------------
- * Entry point of the Blackjack program.
- * 
- * Parameters:
- *   int argc      - Number of command-line arguments.
- *   char *argv[]  - Array of command-line argument strings.
- * Returns: 
- *   int - Exit status of the program.
- */
-int main(int argc, char *argv[]) {
-    if (argc > 1 && strcmp(argv[1], "--help") == 0) {
-        display_help();
-        exit(0);
-    }
-    blackjack_manager();
-    return 0;
 }

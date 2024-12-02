@@ -1,4 +1,7 @@
 blackjack
+*.gcda
+*.gcno
+*.gcov
 test_blackjack
 testing_game_result
 test_results.txt
