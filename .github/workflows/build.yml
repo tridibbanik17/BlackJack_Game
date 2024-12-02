@@ -30,7 +30,7 @@ jobs:
         uses: actions/upload-artifact@v4	
         with:
           name: Test Results			
-          path: ./test_results.txt	
+          path: ./build_testing/test_results
 
       - name: upload coverage
         uses: actions/upload-artifact@v4	
