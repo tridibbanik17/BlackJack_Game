@@ -177,6 +177,9 @@ void play_blackjack(int *balance) {
     int initialBet = get_initial_bet();
     playerHand.bet = initialBet;
     deal_player_hand(deck, &playerHand);
+    draw_card(deck, &dealerHand);
+    draw_card(deck, &dealerHand);
+    printf("Dealer's first card is %s, value of %d\n", dealerHand.cards[0].name, dealerHand.cards[0].value);
     int split_result = check_split(deck, &playerHand, balance);
     if (split_result) {
         handle_split(deck, &playerHand, &splitHand, balance);
@@ -188,8 +191,10 @@ void play_blackjack(int *balance) {
         if (double_down(&playerHand, balance)) hit(deck, &playerHand);
         else player_hit_loop(deck, &playerHand, balance);
     }
-    printf("\nDealer's Turn:\n");
-    play_dealer(deck, &dealerHand);
+    if (playerHand.value < 21 && playerHand.cardCount < NUM_CHARLIE) {
+        printf("\nDealer's Turn:\n");
+        play_dealer(deck, &dealerHand);
+    }
     if (split_result) printf("\nFirst hand:");
     get_result(&dealerHand, &playerHand, balance);
     if (split_result) {

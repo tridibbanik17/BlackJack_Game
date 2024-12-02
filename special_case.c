@@ -112,7 +112,7 @@ int double_down(Hand* hand,int *balance){
         	return 0;
         }
 
-	*balance -= hand->bet;
+	//*balance -= hand->bet;
 	hand->bet *= 2;
 	printf("Your bet has been doubled to: $%d\n", hand->bet);
 
