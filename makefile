@@ -15,4 +15,4 @@ testing_special_case: testing_special_case.c special_case.card_handler
 	gcc -o testing_special_case special_case.c card_handler.c command_line.c testing_special_case.c
 
 clean:
-	rm -f *.o *.gcda *.gcnp *.gcov
+	rm -f *.o *.gcda *.gcnp *.gcov *.gcno
