@@ -11,7 +11,7 @@ blackjack: blackjack.c card_handler.c command_line.c game_result.c special_case.
 testing_game_result: testing_game_result.c game_result.c
 	gcc -o testing_game_result testing_game_result.c game_result.c
 
-testing_special_case: testing_special_case.c special_case.card_handler
+testing_special_case: testing_special_case.c special_case.c card_handler.c command_line.c
 	gcc -o testing_special_case special_case.c card_handler.c command_line.c testing_special_case.c
 
 clean:
