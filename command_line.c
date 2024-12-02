@@ -16,19 +16,17 @@
 void display_help(){
     char help_txt[] =
         "\nBlackjack Game Help\n"
-        "===================\n"
         "Usage:\n"
         "\t\t\t\tblackjack [--help]\n"
         "  --help\t\t\tDisplay this help guide and exit.\n\n"
 
         "Game Overview:\n"
-        "  - The goal of Blackjack is to have a hand value closer to 21 than the dealer's hand,\n"
-        "    without exceeding 21 (busting).\n"
+        "  - The goal of Blackjack is to have a hand value closet to 21, without exceeding 21 (busting).\n"
         "  - You start with a balance of $500.\n\n"
 
         "Gameplay:\n"
-        "  1. Place a bet for the current round. If you enter 0, the default bet is $100.\n"
-        "  2. You will be dealt two cards, and the dealer will reveal one of their cards.\n"
+        "  1. Place a bet for the current round. The default bet is $100.\n"
+        "  2. You will be dealt two cards to start.\n"
         "  3. You can:\n"
         "     - 'Hit' to draw another card.\n"
         "     - 'Stand' to end your turn and keep your current hand.\n"
@@ -46,15 +44,13 @@ void display_help(){
         "  - Aces are worth 11 points but can count as 1 if it helps avoid a bust.\n"
         "  - Face cards (Jack, Queen, King) are worth 10 points.\n"
         "  - Number cards are worth their face value.\n"
-        "  - Splitting and doubling down require sufficient balance.\n\n"
 
         "Commands During Gameplay:\n"
-        "  - 'y' or 'n' for yes/no questions (e.g., whether to hit or continue).\n"
+        "  - 'y' or 'n' for yes/no questions.\n"
         "  - Input your bet amount when prompted.\n\n"
 
         "Ending the Game:\n"
-        "  - The game continues until you choose to stop or your balance reaches $0.\n"
-        "  - Enjoy playing and try to leave with a higher balance than you started!\n\n";
+        "  - The game continues until you choose to stop or you run out of balance.\n"
 
     printf("%s", help_txt);
 }
