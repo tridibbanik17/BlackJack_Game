@@ -1,0 +1,5 @@
+Enter the test scenario number (1-8): Running combined functionality test...
+You have two . Would you like to split? Enter your choice (y/n): You split your hand. Each hand starts with a bet of $50.
+
+Would you like to double down? Enter your choice (y/n): Your bet has been doubled to: $100
+Final split hand value after ace adjustment: 12

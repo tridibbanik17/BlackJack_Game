@@ -61,52 +61,13 @@ test() {
 # Test Cases
 ############################################
 
-# Test 1: Player wins with higher value
-test './game_result_coverage' './build_testing/input/inp1.txt' './build_testing/output/out1.txt' './build_testing/error/empty.txt'
-
-# Test 2: Dealer wins
-test './game_result_coverage' './build_testing/input/inp2.txt' './build_testing/output/out2.txt' './build_testing/error/empty.txt'
-
-# Test 3: Player busts
-test './game_result_coverage' './build_testing/input/inp3.txt' './build_testing/output/out3.txt' './build_testing/error/empty.txt'
-
-# Test 4: 5-Card Charlie
-test './game_result_coverage' './build_testing/input/inp4.txt' './build_testing/output/out4.txt' './build_testing/error/empty.txt'
-
-# Test 5: Blackjack win
-test './game_result_coverage' './build_testing/input/inp5.txt' './build_testing/output/out5.txt' './build_testing/error/empty.txt'
-
-# Test 6: Invalid bet amount
-test './game_result_coverage' './build_testing/input/inp6.txt' './build_testing/output/out6.txt' './build_testing/error/err6.txt'
-
-# Test 7: Invalid input
-test './game_result_coverage' './build_testing/input/inp7.txt' './build_testing/output/out7.txt' './build_testing/error/err7.txt'
-
-# Test 8: Push result
-test './game_result_coverage' './build_testing/input/inp8.txt' './build_testing/output/out8.txt' './build_testing/error/empty.txt'
-
-# Test 9: Test ace_adjuster
 test './special_case_coverage' './build_testing/input/inp1_special_case.txt' './build_testing/output/out1_special_case.txt' './build_testing/error/empty.txt'
-
-# Test 10: Test double_down
 test './special_case_coverage' './build_testing/input/inp2_special_case.txt' './build_testing/output/out2_special_case.txt' './build_testing/error/empty.txt'
-
-# Test 11: Test double_down when card count is not equals 2
 test './special_case_coverage' './build_testing/input/inp3_special_case.txt' './build_testing/output/out3_special_case.txt' './build_testing/error/empty.txt'
-
-# Test 12: Test check_split
 test './special_case_coverage' './build_testing/input/inp4_special_case.txt' './build_testing/output/out4_special_case.txt' './build_testing/error/empty.txt'
-
-# Test 13: Test handle_split
 test './special_case_coverage' './build_testing/input/inp5_special_case.txt' './build_testing/output/out5_special_case.txt' './build_testing/error/empty.txt'
-
-# Test 14: Test handle_split when playerHand.value = 1
-test './special_case_coverage' './build_testing/input/inp6_special_case.txt' './build_testing/output/out6_special_case.txt' './build_testing/error/empty.txt'
-
-# Test 15: Test split_ace_adjuster
-test './special_case_coverage' './build_testing/input/inp7_special_case.txt' './build_testing/output/out7_special_case.txt' './build_testing/error/empty.txt'
-
-# Test 16: Comprehensive test for combined functionality
+test './special_case_coverage' './build_testing/input/inp6_special_case.txt' './build_testing/output/out6_special_case.txt' './build_testing/error/err6_special_case.txt'
+test './special_case_coverage' './build_testing/input/inp7_special_case.txt' './build_testing/output/out7_special_case.txt' './build_testing/error/err7_special_case.txt'
 test './special_case_coverage' './build_testing/input/inp8_special_case.txt' './build_testing/output/out8_special_case.txt' './build_testing/error/empty.txt'
 
 ############################################

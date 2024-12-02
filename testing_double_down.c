@@ -1,24 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-typedef struct {
-    char name[20];
-    int value;
-    int rankIndex;
-} Card;
-
-typedef struct {
-    Card cards[2];
-    int bet;
-    int value;
-    int cardCount;
-} Hand;
+#include "blackjack.h"
 
 // Function to get user input for decision (yes or no)
-int get_input() {
+bool get_input() {
     char response[10];
     fgets(response, sizeof(response), stdin);
-    return response[0] == 'y' || response[0] == 'Y';
+    return response[0] == true || response[0] == true;
 }
 
 // Double down function
@@ -48,6 +36,7 @@ int double_down(Hand* hand, int* balance) {
 
 int main() {
     int balance = 100;  // Initial balance
+    int balance2 = 40;
 
     // Initialize player hand
     Hand playerHand;
@@ -61,8 +50,15 @@ int main() {
     int result = double_down(&playerHand, &balance);
 
     // Output results
+    while (balance2 == 40) {
+        printf("Player's final bet: $%d\n", playerHand.bet);
+        printf("Remaining balance: $%d\n", balance2);
+        break;
+    }
     printf("Player's final bet: $%d\n", playerHand.bet);
     printf("Remaining balance: $%d\n", balance);
+
+
 
     return 0;
 }

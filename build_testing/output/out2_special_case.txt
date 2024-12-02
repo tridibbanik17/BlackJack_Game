@@ -1,0 +1,5 @@
+Enter the test scenario number (1-8): Running double_down test...
+Would you like to double down? (1 for Yes, 0 for No): Would you like to double down? Enter your choice (y/n): Your bet has been doubled to: $100
+Double down result: 1, Remaining balance: 100
+Would you like to double down? Enter your choice (y/n): Not enough balance to double down.
+Double down result with insufficient balance: 0

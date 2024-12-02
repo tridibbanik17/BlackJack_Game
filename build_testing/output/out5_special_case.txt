@@ -1,0 +1,5 @@
+Enter the test scenario number (1-8): Running handle_split test...
+You split your hand. Each hand starts with a bet of $50.
+
+Remaining balance: 100
+Player hand value: 20, Split hand value: 0
