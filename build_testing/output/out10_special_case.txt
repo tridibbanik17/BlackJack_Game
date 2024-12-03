@@ -1,0 +1,4 @@
+Enter the test scenario number (1-8): Running check_split test...
+Split decision with different ranks: 0
+You have two . Would you like to split? Enter your choice (y/n): Split decision with insufficient balance: 0
+You have two . Would you like to split? Enter your choice (y/n): Split decision with valid conditions: 0

@@ -109,6 +109,12 @@ test './special_case_coverage' './build_testing/input/inp7_special_case.txt' './
 # Test 16: Comprehensive test for combined functionality
 test './special_case_coverage' './build_testing/input/inp8_special_case.txt' './build_testing/output/out8_special_case.txt' './build_testing/error/empty.txt'
 
+# Test 17: Test double_down with user input 'n'
+test './special_case_coverage' './build_testing/input/inp10_special_case.txt' './build_testing/output/out10_special_case.txt' './build_testing/error/empty.txt'
+
+# Test 18: Test check_split with user input 'n'
+test './special_case_coverage' './build_testing/input/inp9_special_case.txt' './build_testing/output/out9_special_case.txt' './build_testing/error/empty.txt'
+
 ############################################
 # Clean up
 ############################################

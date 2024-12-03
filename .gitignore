@@ -4,5 +4,6 @@ blackjack
 *.gcov
 test_blackjack
 testing_game_result
-test_results.txt
-coverage_report.txt
+test_script
+testing_game_result
+testing_special_case

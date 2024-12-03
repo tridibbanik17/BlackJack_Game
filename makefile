@@ -1,6 +1,6 @@
 # Makefile
 
-all: blackjack testing_game_result
+all: blackjack testing_game_result testing_special_case
 	
 gui_blackjack: guimain.c screens.c command_line.c gui_game_logic.c screens.h cardStructs.h
 	gcc guimain.c screens.c command_line.c gui_game_logic.c -o test_gui -lSDL2 -lSDL2_ttf
