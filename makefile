@@ -15,4 +15,4 @@ testing_special_case: testing_special_case.c special_case.c card_handler.c comma
 	gcc -o testing_special_case special_case.c card_handler.c command_line.c testing_special_case.c -lm
 
 clean:
-	rm -f *.o *.gcda *.gcno *.gcov blackjack testing_game_result testing_special_case test_gui
+	rm -f *.o *.gcda *.gcno *.gcov blackjack testing_game_result testing_special_case test_gui game_result_coverage coverage_report_game_result.txt

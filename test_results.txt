@@ -1,18 +1,166 @@
-TC 1 Passed
-TC 2 Passed
-TC 3 Passed
-TC 4 Passed
-TC 5 Passed
-TC 6 Passed
-TC 7 Passed
-TC 8 Passed
-TC 9 Passed
-TC 10 Passed
-TC 11 Passed
-TC 12 Passed
-TC 13 Passed
-TC 14 Passed
-TC 15 Passed
-TC 16 Passed
-TC 17 Passed
-TC 18 Passed
+TC 1 Failed (Standard Error)
+1,4d0
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/game_result_coverage-game_result.gcda:Skip
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/game_result_coverage-testing_game_result.gcda:Skip
+-----------
+TC 2 Failed (Standard Error)
+1,4d0
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/game_result_coverage-game_result.gcda:Skip
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/game_result_coverage-testing_game_result.gcda:Skip
+-----------
+TC 3 Failed (Standard Error)
+1,4d0
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/game_result_coverage-game_result.gcda:Skip
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/game_result_coverage-testing_game_result.gcda:Skip
+-----------
+TC 4 Failed (Standard Error)
+1,4d0
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/game_result_coverage-game_result.gcda:Skip
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/game_result_coverage-testing_game_result.gcda:Skip
+-----------
+TC 5 Failed (Standard Error)
+1,4d0
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/game_result_coverage-game_result.gcda:Skip
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/game_result_coverage-testing_game_result.gcda:Skip
+-----------
+TC 6 Failed (Standard Error)
+2,5d1
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/game_result_coverage-game_result.gcda:Skip
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/game_result_coverage-testing_game_result.gcda:Skip
+-----------
+TC 7 Failed (Standard Error)
+2,5d1
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/game_result_coverage-game_result.gcda:Skip
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/game_result_coverage-testing_game_result.gcda:Skip
+-----------
+TC 8 Failed (Standard Error)
+1,4d0
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/game_result_coverage-game_result.gcda:Skip
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/game_result_coverage-testing_game_result.gcda:Skip
+-----------
+TC 9 Failed (Standard Error)
+1,8d0
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/special_case_coverage-testing_special_case.gcda:Skip
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/special_case_coverage-command_line.gcda:Skip
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/special_case_coverage-card_handler.gcda:Skip
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/special_case_coverage-special_case.gcda:Skip
+-----------
+TC 10 Failed (Standard Error)
+1,8d0
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/special_case_coverage-testing_special_case.gcda:Skip
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/special_case_coverage-command_line.gcda:Skip
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/special_case_coverage-card_handler.gcda:Skip
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/special_case_coverage-special_case.gcda:Skip
+-----------
+TC 11 Failed (Standard Error)
+1,8d0
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/special_case_coverage-testing_special_case.gcda:Skip
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/special_case_coverage-command_line.gcda:Skip
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/special_case_coverage-card_handler.gcda:Skip
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/special_case_coverage-special_case.gcda:Skip
+-----------
+TC 12 Failed (Standard Error)
+1,8d0
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/special_case_coverage-testing_special_case.gcda:Skip
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/special_case_coverage-command_line.gcda:Skip
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/special_case_coverage-card_handler.gcda:Skip
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/special_case_coverage-special_case.gcda:Skip
+-----------
+TC 13 Failed (Standard Error)
+1,8d0
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/special_case_coverage-testing_special_case.gcda:Skip
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/special_case_coverage-command_line.gcda:Skip
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/special_case_coverage-card_handler.gcda:Skip
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/special_case_coverage-special_case.gcda:Skip
+-----------
+TC 14 Failed (Standard Error)
+1,8d0
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/special_case_coverage-testing_special_case.gcda:Skip
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/special_case_coverage-command_line.gcda:Skip
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/special_case_coverage-card_handler.gcda:Skip
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/special_case_coverage-special_case.gcda:Skip
+-----------
+TC 15 Failed (Standard Error)
+1,8d0
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/special_case_coverage-testing_special_case.gcda:Skip
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/special_case_coverage-command_line.gcda:Skip
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/special_case_coverage-card_handler.gcda:Skip
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/special_case_coverage-special_case.gcda:Skip
+-----------
+TC 16 Failed (Standard Error)
+1,8d0
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/special_case_coverage-testing_special_case.gcda:Skip
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/special_case_coverage-command_line.gcda:Skip
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/special_case_coverage-card_handler.gcda:Skip
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/special_case_coverage-special_case.gcda:Skip
+-----------
+TC 17 Failed (Standard Error)
+1,8d0
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/special_case_coverage-testing_special_case.gcda:Skip
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/special_case_coverage-command_line.gcda:Skip
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/special_case_coverage-card_handler.gcda:Skip
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/special_case_coverage-special_case.gcda:Skip
+-----------
+TC 18 Failed (Standard Error)
+1,8d0
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/special_case_coverage-testing_special_case.gcda:Skip
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/special_case_coverage-command_line.gcda:Skip
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/special_case_coverage-card_handler.gcda:Skip
+< profiling:/root/2XC3_Teams_Project:Cannot create directory
+< profiling:/root/2XC3_Teams_Project/the-team-assignment-team-34/special_case_coverage-special_case.gcda:Skip
+-----------
