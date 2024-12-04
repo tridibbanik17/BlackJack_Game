@@ -19,11 +19,7 @@ jobs:
       - name: special case coverage
         run: make clean; gcc -o special_case_coverage --coverage special_case.c card_handler.c command_line.c testing_special_case.c; ./test_script_special_case; gcov special_case_coverage-special_case.c > coverage_report_special_case.txt
 
-      - name: test game results
-        run: ./test_script_game_result>./test_results_game_result.txt
 
-      - name: test special case
-        run: ./test_script_special_case>./test_results_special_case.txt
 
       # Artifacts
       - name: upload blackjack			
@@ -43,6 +39,7 @@ jobs:
         with:
           name: Special Case Coverage
           path: ./coverage_report_special_case.txt
-      
+
+
 
           
