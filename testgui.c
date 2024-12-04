@@ -40,7 +40,7 @@ int main(){
 
     if (checkBust(testHand3) == false){
         printf("Test 3 Passed");
-    } else 
+    } else {
         printf("Test 3 Failed");
     }
 

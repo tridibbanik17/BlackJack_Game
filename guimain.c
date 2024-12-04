@@ -12,6 +12,9 @@
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 600
 
+/*checks if balance is above 0, to see if game is over or if player can keep playing, takes in balance
+ * returns the appropriate game state depending on the balance
+ */
 GameState checkBalance(int balance) {
     if (balance > 0){
         return CONTINUE;
@@ -21,6 +24,9 @@ GameState checkBalance(int balance) {
 
 }
 
+/*updates the balance depending on if the player won or lost
+ * takes in a pointer to the balance (so that it can be updated), the bet amount, and the game state
+ */
 void update_balance(int *balance, int bet, GameState state) {
     if (state == WIN) {
         *balance += bet;
@@ -31,11 +37,13 @@ void update_balance(int *balance, int bet, GameState state) {
 
 int main(int argc, char *argv[]) {
 
+    /*if only the --help string is called, print it*/
     if(argc > 1 && strcmp(argv[1], "--help") == 0){
 		display_help();
 		return 0;
     }
 
+    /*initialize all the gui stuff*/
     if (SDL_Init(SDL_INIT_VIDEO) < 0 || TTF_Init() < 0) {
         printf("Failed to initialize SDL or TTF: %s\n", SDL_GetError());
         return -1;
@@ -59,6 +67,7 @@ int main(int argc, char *argv[]) {
         return -1;
     }
 
+    /*intialize all game values*/
     GameState state = MENU;
     int balance = 500;
     int bet;
@@ -71,6 +80,7 @@ int main(int argc, char *argv[]) {
     bool running = true;
     SDL_Event event;
     while (running){
+        /*handle inputs, depending on the game state*/
         if (state == MENU){
             while(SDL_PollEvent(&event)) {
                 if (event.type == SDL_QUIT) {
@@ -136,7 +146,6 @@ int main(int argc, char *argv[]) {
                         case SDLK_s:
                             printf("the s key was pressed! \n");
                             play_dealer(deck, &dealerHand);
-                            //this below should be a function tbh
                             if (checkBust(dealerHand)){
                                 printf("dealer bust! \n");
                                 state = WIN;
@@ -261,11 +270,13 @@ int main(int argc, char *argv[]) {
                 }
             }
         }
+        //update renderer, and the present the new gui to the screen
         render_game(renderer, font, state, bet_input, &balance, &playerHand, &dealerHand);
         SDL_RenderPresent(renderer);
 
     }
 
+    //close the gui when finished
     TTF_CloseFont(font);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);

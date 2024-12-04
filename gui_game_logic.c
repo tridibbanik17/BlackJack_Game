@@ -25,7 +25,7 @@ void ace_adjuster(Hand* hand){
 	
 }
 
-/*Draws card from deck, */
+/*Draws card from deck and places into hand, accepts a hand as an arg*/
 void draw_card(Card* deck, Hand* hand) {
     // Randomly select a card
     int cardIndex;
@@ -45,12 +45,14 @@ void draw_card(Card* deck, Hand* hand) {
     ace_adjuster(hand);
 }
 
+/*init hand to zero values, accepts a hand as an arg*/
 void initialize_hand(Hand* hand) {
     hand->value = 0;
     hand->cardCount = 0;
     hand->bet = 0;
 }
 
+/*intializes deck with all 52 cards, accepts a deck as an arg*/
 void initialize_deck(Card* deck) {
     int idx = 0;
     for (int suit = 0; suit < NUM_SUITS; suit++) {
@@ -68,6 +70,7 @@ void initialize_deck(Card* deck) {
     }
 }
 
+/*deals player hand to 2 cards to intialize, accepts hand and deck as an arg*/
 void deal_player_hand(Card *deck, Hand *playerHand) {
     // draw initial two cards
     for (int i = 0; i < 2; i++) {
@@ -75,12 +78,14 @@ void deal_player_hand(Card *deck, Hand *playerHand) {
     }
 }
 
+/*initialize all cards, easy function call at the start of the round, accepts both the dealer and player hands, as well as deck*/
 void initialize_cards(Card *deck, Hand *playerHand, Hand*dealerHand){
     initialize_deck(deck);
     initialize_hand(playerHand);
     initialize_hand(dealerHand);
 }
 
+/*accepts a players hand (player or dealer) and checks if value of hadn is over 21, returns true if over, otherwise false*/
 bool checkBust(Hand someHand){
     if (someHand.value > 21){
         return true;
@@ -89,6 +94,7 @@ bool checkBust(Hand someHand){
     }
 }
 
+/*accepts the deck and the dealer's hand. Draws cards from the deck into the delaer hand until they get over 17*/
 void play_dealer(Card *deck, Hand *dealerHand) {
     // Dealer must draw cards until their hand value is at least 17
     while (dealerHand->value < 17) {
