@@ -12,7 +12,7 @@ typedef enum {
     PUSH
 } GameState;
 
-void render_game(SDL_Renderer *renderer, TTF_Font *font, GameState state, char* bet_input, int balance, Hand *playerHand, Hand *dealerHand);
+void render_game(SDL_Renderer *renderer, TTF_Font *font, GameState state, char* bet_input, int *balance, Hand *playerHand, Hand *dealerHand);
 
 void render_text(SDL_Renderer *renderer, TTF_Font *font, const char *text, int x, int y);
 
