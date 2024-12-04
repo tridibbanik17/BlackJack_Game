@@ -19,17 +19,23 @@ $ ./blackjack
 and follow the on screen instructions to play.
 
 ### GUI:
-To play the game using the GUI, you first must install the necessary dependencies. To install Simple DirectMedia Layer 2 (sdl2) use the command: <br />
+To play the game using the GUI, you first must install the necessary dependencies. To install Simple DirectMedia Layer 2 (sdl2) use these two command: <br />
 ```
 $ sudo apt install libsdl2-dev
+```
+```
+$ sudo apt install libsdl2-ttf-dev
 ```
 and continue with signing into your administrator account (don't forget to sign out later!). <br />
 Then, create the executable file: <br />
 ```
-$ make
+$ make gui_blackjack
 ```
 Finally, run: <br /> 
 ```
-$ ./blackjack_gui
+$ ./gui_blackjack
 ```
-and allow the computer to run the gui!
+and allow the computer to run the GUI!
+
+
+Enjoy!!
