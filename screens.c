@@ -17,6 +17,7 @@ typedef enum {
     PUSH
 } GameState;
 
+/*renders text onto the gui, takes in the renderer object, the font, a string to print, and the coordinates where it'll be placed*/
 void render_text(SDL_Renderer *renderer, TTF_Font *font, const char *text, int x, int y) {
     SDL_Color color = {255, 255, 255, 255}; // White color
     SDL_Surface *surface = TTF_RenderText_Solid(font, text, color);
@@ -29,6 +30,7 @@ void render_text(SDL_Renderer *renderer, TTF_Font *font, const char *text, int x
     SDL_DestroyTexture(texture);
 }
 
+/*renders player hand onto the gui, takes in the renderer object, the font, the hand to print, and the coordinates where it'll be placed*/
 void render_player_hand(SDL_Renderer *renderer, TTF_Font *font, Hand *someHand, int x, int y) {
     SDL_Rect cardRectangle;
     cardRectangle.w = 50;
@@ -67,6 +69,7 @@ void render_player_hand(SDL_Renderer *renderer, TTF_Font *font, Hand *someHand, 
     }
 }
 
+/*renders deal onto the gui, takes in the renderer object, the font, a hand to print, and the coordinates where it'll be placed*/
 void render_dealer_hand(SDL_Renderer *renderer, TTF_Font *font, Hand *someHand, int x, int y) {
     SDL_Rect cardRectangle;
     cardRectangle.w = 50;
@@ -103,6 +106,7 @@ void render_dealer_hand(SDL_Renderer *renderer, TTF_Font *font, Hand *someHand, 
     SDL_DestroyTexture(textTexture);
 }
 
+/*renders the actual frames onto the gui, takes in the renderer object, the font, the state, bet, balance and hands*/
 void render_game(SDL_Renderer *renderer, TTF_Font *font, GameState state, char* bet_input, int *balance, Hand *playerHand, Hand *dealerHand){
     SDL_SetRenderDrawColor(renderer, 0, 128, 0, 255); //Green background
     SDL_RenderClear(renderer);
