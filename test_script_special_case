@@ -1,0 +1,101 @@
+#!/bin/bash
+
+# Declare test counters
+declare -i tc=0
+declare -i fails=0
+
+############################################
+# Function to run a single test
+############################################
+test() {
+    tc=tc+1
+
+    local COMMAND=$1
+    local INP=$2
+    local EX_OUT=$3
+    local EX_ERR=$4
+
+    # Determine expected return code
+    EX_RET=1
+    if [[ ! -s $EX_ERR ]]; then
+        EX_RET=0
+    fi
+
+    # Run the command
+    $COMMAND < $INP > test_out.txt 2> test_err.txt
+    RET=$?
+
+    # Check return code
+    if [[ $RET != $EX_RET ]]; then
+        echo "TC $tc Failed (Return Code)"
+        echo "Returned $RET, Expected $EX_RET"
+        echo "-----------"
+        fails=$fails+1
+        return
+    fi
+
+    # Check standard output
+    DIFF=$(diff test_out.txt $EX_OUT)
+    if [[ $DIFF != '' ]]; then
+        echo "TC $tc Failed (Standard Output)"
+        echo "$DIFF"
+        echo "-----------"
+        fails=$fails+1
+        return
+    fi
+
+    # Check standard error
+    DIFF=$(diff test_err.txt $EX_ERR)
+    if [[ $DIFF != '' ]]; then
+        echo "TC $tc Failed (Standard Error)"
+        echo "$DIFF"
+        echo "-----------"
+        fails=$fails+1
+        return
+    fi
+
+    echo "TC $tc Passed"
+}
+
+############################################
+# Test Cases
+############################################
+
+# Test 9: Test ace_adjuster
+test './special_case_coverage' './build_testing/input/inp1_special_case.txt' './build_testing/output/out1_special_case.txt' './build_testing/error/empty.txt'
+
+# Test 10: Test double_down
+test './special_case_coverage' './build_testing/input/inp2_special_case.txt' './build_testing/output/out2_special_case.txt' './build_testing/error/empty.txt'
+
+# Test 11: Test double_down when card count is not equals 2
+test './special_case_coverage' './build_testing/input/inp3_special_case.txt' './build_testing/output/out3_special_case.txt' './build_testing/error/empty.txt'
+
+# Test 12: Test check_split
+test './special_case_coverage' './build_testing/input/inp4_special_case.txt' './build_testing/output/out4_special_case.txt' './build_testing/error/empty.txt'
+
+# Test 13: Test handle_split
+test './special_case_coverage' './build_testing/input/inp5_special_case.txt' './build_testing/output/out5_special_case.txt' './build_testing/error/empty.txt'
+
+# Test 14: Test handle_split when playerHand.value = 1
+test './special_case_coverage' './build_testing/input/inp6_special_case.txt' './build_testing/output/out6_special_case.txt' './build_testing/error/empty.txt'
+
+# Test 15: Test split_ace_adjuster
+test './special_case_coverage' './build_testing/input/inp7_special_case.txt' './build_testing/output/out7_special_case.txt' './build_testing/error/empty.txt'
+
+# Test 16: Comprehensive test for combined functionality
+test './special_case_coverage' './build_testing/input/inp8_special_case.txt' './build_testing/output/out8_special_case.txt' './build_testing/error/empty.txt'
+
+# Test 17: Test double_down with user input 'n'
+test './special_case_coverage' './build_testing/input/inp10_special_case.txt' './build_testing/output/out10_special_case.txt' './build_testing/error/empty.txt'
+
+# Test 18: Test check_split with user input 'n'
+test './special_case_coverage' './build_testing/input/inp9_special_case.txt' './build_testing/output/out9_special_case.txt' './build_testing/error/empty.txt'
+
+############################################
+# Clean up
+############################################
+
+rm test_out.txt test_err.txt
+
+# Return code
+exit $fails
