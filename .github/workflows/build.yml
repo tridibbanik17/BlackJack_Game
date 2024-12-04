@@ -17,7 +17,7 @@ jobs:
         run: make clean; gcc -o game_result_coverage --coverage testing_game_result.c game_result.c; ./test_script_game_result > test_results_game_result.txt; gcov game_result_coverage-game_result.c > coverage_report_game_result.txt
 
       - name: special case coverage
-        run: make clean; gcc -o special_case_coverage --coverage special_case.c card_handler.c command_line.c testing_special_case.c > test_results_special_case.txt; ./test_script_special_case; gcov special_case_coverage-special_case.c > coverage_report_special_case.txt
+        run: make clean; gcc -o special_case_coverage --coverage special_case.c card_handler.c command_line.c testing_special_case.c; ./test_script_special_case > test_results_special_case.txt; gcov special_case_coverage-special_case.c > coverage_report_special_case.txt
 
 
 
