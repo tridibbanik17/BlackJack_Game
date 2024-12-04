@@ -115,9 +115,10 @@ void render_game(SDL_Renderer *renderer, TTF_Font *font, GameState state, char* 
     if (state == MENU){
         render_text(renderer, font, "Welcome to Blackjack! (enter to continue)", 100, 50);
     } else if (state == BET){
-        render_text(renderer, font, "How much would you like to bet? (enter to continue)", 100, 50);
+        render_text(renderer, font, "How much would you like to bet?", 100, 50);
+        render_text(renderer, font, "(type in bet amount, and press enter to continue)", 100, 75);
         render_text(renderer, font, bet_input, 100, 550);
-        render_text(renderer, font, strBalance, 100, 450);
+        render_text(renderer, font, strBalance, 100, 525);
     } else if (state == PLAYER_TURN) {
         dealerVal = dealerHand->cards[0].value;
         playerVal = playerHand->value;

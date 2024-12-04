@@ -12,7 +12,7 @@
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 600
 
-GameState checkBalance(int balance, GameState *state) {
+GameState checkBalance(int balance) {
     if (balance > 0){
         return CONTINUE;
     } else {
@@ -102,7 +102,7 @@ int main(int argc, char *argv[]) {
                 } else if (event.type == SDL_KEYDOWN) {
                     switch (event.key.keysym.sym){
                         case SDLK_BACKSPACE:
-                            if (strlen(bet_input) > 0){
+                            if (strlen(bet_input) > 1){
                                 bet_input[strlen(bet_input) - 1] = '\0';
                             }
                             break;
@@ -165,7 +165,7 @@ int main(int argc, char *argv[]) {
                     switch (event.key.keysym.sym){
                         case SDLK_RETURN:
                             update_balance(&balance, bet, state);
-                            state = checkBalance(balance, &state);
+                            state = checkBalance(balance);
                             printf("enter key pressed! \n");
                             state = CONTINUE;
                             break;
@@ -183,7 +183,7 @@ int main(int argc, char *argv[]) {
                     switch (event.key.keysym.sym){
                         case SDLK_RETURN:
                             update_balance(&balance, bet, state);
-                            state = checkBalance(balance, &state);
+                            state = checkBalance(balance);
                             break;
                         default:
                             printf("The %d key was pressed \n", event.key.keysym.sym);
@@ -200,7 +200,7 @@ int main(int argc, char *argv[]) {
                         case SDLK_RETURN:
                             update_balance(&balance, bet, state);
                             printf("enter key pressed! \n");
-                            state = checkBalance(balance, &state);
+                            state = checkBalance(balance);
                             break;
                         default:
                             printf("The %d key was pressed \n", event.key.keysym.sym);

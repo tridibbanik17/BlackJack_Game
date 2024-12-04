@@ -12,6 +12,7 @@
 const char* suits[] = {"Hearts", "Diamonds", "Clubs", "Spades"};
 const char* ranks[] = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"};
 
+/*takes into account that aces can be 11 or 1, takes in a users hand returns nothing*/
 void ace_adjuster(Hand* hand){
         for(int i=0; i<hand->cardCount; i++){
                 if(hand->cards[i].value == 11){
@@ -24,6 +25,7 @@ void ace_adjuster(Hand* hand){
 	
 }
 
+/*Draws card from deck, */
 void draw_card(Card* deck, Hand* hand) {
     // Randomly select a card
     int cardIndex;
