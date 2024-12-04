@@ -27,21 +27,21 @@ int main(){
     testHand3.bet = 200;
 
     if (checkBust(testHand1) == true){
-        
+        printf("Test 1 Passed");
     } else {
-        //test case failed
+        printf("Test 1 Failed");
     }
 
     if (checkBust(testHand2) == false){
-        //test case passed
+        printf("Test 2 Passed");
     } else {
-        //test case failed
+        printf("Test 2 Failed");
     }
 
     if (checkBust(testHand3) == false){
-        //test case passed
-    } else {
-        //test case failed
+        printf("Test 3 Passed");
+    } else 
+        printf("Test 3 Failed");
     }
 
     GameState state = MENU;
@@ -50,24 +50,24 @@ int main(){
 
 
     if (checkBalance(balance1) == CONTINUE){
-        //test case passed
+        printf("Test 4 Passed");
     } else {
-        //test case failed
+        printf("Test 4 Failed");
     }
 
     if (checkBalance(balance2) == GAME_OVER){
-        //test case passed
+        printf("Test 5 Passed");
     } else {
-        //test case failed
+        printf("Test 5 Failed");
     }
 
     state = WIN;
     update_balance(&balance1, 100, state);
 
     if (balance1 == 600){ 
-        //test case passed
+        printf("Test 6 Passed");
     } else {
-        //test case failed
+        printf("Test 6 Failed");
     }
 
     balance1 = 500;
@@ -75,9 +75,9 @@ int main(){
     update_balance(&balance1, 100, state);
 
     if (balance1 == 400){
-        //test case passed
+        printf("Test 7 Passed");
     } else {
-        //tese case failed
+        printf("Test 7 Failed");
     }
 
 
@@ -86,24 +86,24 @@ int main(){
     deal_player_hand(deck, &dealerHand);
 
     if (playerHand.cardCount == 2 && dealerHand.cardCount == 2){
-        //test case passed
+        printf("Test 8 Passed");
     } else {
-        //test case failed
+        printf("Test 8 Failed");
     }
 
     draw_card(deck, &playerHand);
 
     if (playerHand.cardCount == 3){
-        //test case passed
+        printf("Test 9 Passed");
     } else {
-        //test case failed
+        printf("Test 9 Failed");
     }
 
     play_dealer(deck, &dealerHand);
 
     if (dealerHand.value > 17){
-        //test case passed
+        printf("Test 10 Passed");
     } else {
-        //text case failed
+        printf("Test 10 Failed");
     }
 }
