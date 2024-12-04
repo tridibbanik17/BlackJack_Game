@@ -12,6 +12,23 @@
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 600
 
+GameState checkBalance(int balance, GameState *state) {
+    if (balance > 0){
+        return CONTINUE;
+    } else {
+        return GAME_OVER;
+    }
+
+}
+
+void update_balance(int *balance, int bet, GameState state) {
+    if (state == WIN) {
+        *balance += bet;
+    } else {
+        *balance -= bet;
+    }
+}
+
 int main(int argc, char *argv[]) {
 
     if(argc > 1 && strcmp(argv[1], "--help") == 0){
@@ -43,7 +60,7 @@ int main(int argc, char *argv[]) {
     }
 
     GameState state = MENU;
-    int balance;
+    int balance = 500;
     int bet;
     char bet_input[256] = "$";
     Card deck [NUM_CARDS];
@@ -91,12 +108,10 @@ int main(int argc, char *argv[]) {
                             break;
                         case SDLK_RETURN:
                             printf("enter key pressed! \n");
-                            printf("\n");
-                            //smt here
-                            puts(bet_input);
-                            int bet = atoi(&bet_input[1]);
-                            printf("the current bet is: %d \n", bet);
-                            state = PLAYER_TURN;
+                            bet = atoi(&bet_input[1]);
+                            if ((bet <= balance) && (0 < bet)){
+                                state = PLAYER_TURN;
+                            }
                             break;
                         default:
                             printf("The %d key was pressed \n", event.key.keysym.sym);
@@ -117,7 +132,6 @@ int main(int argc, char *argv[]) {
                         case SDLK_h:
                             draw_card(deck, &playerHand);
                             printf("h key pressed! \n");
-                            printf("The current value of player hand is, %d \n", playerHand.value);
                             break;
                         case SDLK_s:
                             printf("the s key was pressed! \n");
@@ -150,7 +164,8 @@ int main(int argc, char *argv[]) {
                 } else if (event.type == SDL_KEYDOWN) {
                     switch (event.key.keysym.sym){
                         case SDLK_RETURN:
-                            //balance = balance + bet;
+                            update_balance(&balance, bet, state);
+                            state = checkBalance(balance, &state);
                             printf("enter key pressed! \n");
                             state = CONTINUE;
                             break;
@@ -167,16 +182,8 @@ int main(int argc, char *argv[]) {
                 } else if (event.type == SDL_KEYDOWN) {
                     switch (event.key.keysym.sym){
                         case SDLK_RETURN:
-                            printf("The balance before subtraction is: %d \n", balance);
-                            printf("The current bet is: %d \n", bet);
-                            balance = balance - bet;
-                            printf("The current balance is: %d \n", balance);
-                            printf("enter key pressed! \n");
-                            if (balance > 0){
-                                state = CONTINUE;
-                            } else {
-                                state = GAME_OVER;
-                            }
+                            update_balance(&balance, bet, state);
+                            state = checkBalance(balance, &state);
                             break;
                         default:
                             printf("The %d key was pressed \n", event.key.keysym.sym);
@@ -191,14 +198,9 @@ int main(int argc, char *argv[]) {
                 } else if (event.type == SDL_KEYDOWN) {
                     switch (event.key.keysym.sym){
                         case SDLK_RETURN:
-                            balance -= bet;
+                            update_balance(&balance, bet, state);
                             printf("enter key pressed! \n");
-                            //should also be a function below
-                            if (balance > 0){
-                                state = CONTINUE;
-                            } else {
-                                state = GAME_OVER;
-                            }
+                            state = checkBalance(balance, &state);
                             break;
                         default:
                             printf("The %d key was pressed \n", event.key.keysym.sym);
@@ -259,7 +261,7 @@ int main(int argc, char *argv[]) {
                 }
             }
         }
-        render_game(renderer, font, state, bet_input, balance, &playerHand, &dealerHand);
+        render_game(renderer, font, state, bet_input, &balance, &playerHand, &dealerHand);
         SDL_RenderPresent(renderer);
 
     }
