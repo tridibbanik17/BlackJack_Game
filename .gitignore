@@ -7,3 +7,7 @@ testing_game_result
 test_script
 testing_game_result
 testing_special_case
+./game_result_coverage
+./coverage_report_game_result.txt
+./test_results.txt
+./build_testing/test_results.txt
