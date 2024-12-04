@@ -1,0 +1,5 @@
+File 'game_result.c'
+Lines executed:0.00% of 17
+Creating 'game_result.c.gcov'
+
+Lines executed:0.00% of 17
