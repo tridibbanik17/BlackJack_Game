@@ -16,30 +16,30 @@ Our code is split into two different components, making it more accessible to pl
 ### Command-Line:
 To run the code in the command line, use the command: <br />
  ```
- $ make
+make
 ``` 
 to make the executable file, and then: <br />
 ```
-$ ./blackjack
+./blackjack
 ```
 and follow the on screen instructions to play.
 
 ### GUI:
 To play the game using the GUI, you first must install the necessary dependencies. To install Simple DirectMedia Layer 2 (sdl2) use these two command: <br />
 ```
-$ sudo apt install libsdl2-dev
+sudo apt install libsdl2-dev
 ```
 ```
-$ sudo apt install libsdl2-ttf-dev
+sudo apt install libsdl2-ttf-dev
 ```
 and continue with signing into your administrator account (don't forget to sign out later!). <br />
 Then, create the executable file: <br />
 ```
-$ make gui_blackjack
+make gui_blackjack
 ```
 Finally, run: <br /> 
 ```
-$ ./gui_blackjack
+./gui_blackjack
 ```
 and allow the computer to run the GUI!
 
